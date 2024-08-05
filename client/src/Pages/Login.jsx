@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <>
-      <div class="flex justify-center items-center h-screen p-10 ">
+      <div class="flex justify-center items-center h-screen p-10">
         <div class="grid md:grid-cols-2 grid-cols-1  border rounded-3xl">
           <div class="flex justify-center items-center p-5">
             <form action="">
@@ -28,7 +28,7 @@ const Login = () => {
                 <option value="Chemist">Chemist</option>
                 <option value="Admin">Admin</option>
               </select>
-              <div className="flex">
+              <div className="flex mb-4">
                 <button
                   type="submit"
                   class=" bg-blue-400 hover:bg-blue-500 border outline-none rounded-md py-3 w-full px-4 font-semibold text-white"
@@ -42,7 +42,7 @@ const Login = () => {
                   Cancel
                 </button>
               </div>
-              <span className="text-center">
+              <span className="text-center ">
                 don't have account register
                 <Link to="/register" className="font-bold underline mx-2">
                   here

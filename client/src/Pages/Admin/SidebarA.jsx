@@ -2,10 +2,11 @@ import React from "react";
 import SidebarMenu from "../../Components/SidebarMenu";
 import { Routes , Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
+import AddEmployee from "./AddEmployee";
 
 const SidebarP = () => {
 
-    const menu = [{name:"Dashboard",path:"dashboard" },{name:"Add Employee",path:"addemp"} ,{name:"Delete Employee",path:"dltemp"} , {name:"Bills",path:"bills"}];
+    const menu = [{name:"Dashboard",path:"" },{name:"Add Employee",path:"addemp"} , {name:"Bills",path:"bills"}];
 
   return (
     <div class="flex h-screen bg-pink-100">
@@ -88,7 +89,8 @@ const SidebarP = () => {
         <div class="p-4">
           {/* here render the pages  */}
           <Routes>
-            <Route path="dashboard" element={<Dashboard/>}></Route>
+            <Route  path="/" element={<Dashboard/>}></Route>
+            <Route path="addemp" element={<AddEmployee/>}/>
           </Routes>
         </div>
       </div>

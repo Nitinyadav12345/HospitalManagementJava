@@ -15,10 +15,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User extends BaseEntity{
+public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     @NotBlank(message = "User name cannot be null")
-    private String Name;
+    private String name;
     @Column(unique = true,nullable = false)
     @NotBlank(message = "User Email  cannot be null and should be unique")
     private String email;

@@ -14,8 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -25,9 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 //to enable method level authorization support : pre n post authorization
 public class SecurityConfig {
-    //dep : pwd encoder
-    @Autowired
-    private PasswordEncoder enc;
+
     //dep : custom jwt auth filter
     @Autowired
     private JwtAuthenticationFilter jwtFilter;
@@ -46,7 +43,7 @@ public class SecurityConfig {
                 .exceptionHandling().authenticationEntryPoint(authEntry).
                 and().
                 authorizeRequests()
-                .antMatchers("/products/view","/users/signup","/users/signin",
+                .antMatchers("/products/view","/users/signup","/users/signin","/user/login","/user/register",
                         "/v*/api-doc*/**","/swagger-ui/**").permitAll()
                 // only required for JS clnts (react / angular) : for the pre flight requests
                 .antMatchers(HttpMethod.OPTIONS).permitAll()

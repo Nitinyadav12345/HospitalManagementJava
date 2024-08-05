@@ -13,10 +13,10 @@ const Navbar = () => {
     <div className='mx-5'>
       <div className="navbar bg-base-100">
         <div className="flex-1 space-x-5 ml-5">
-          <a className='hover:text-teal-600 text-xl font-bold' href="#">Home</a>
-          <a className='hover:text-teal-600 text-xl font-bold' href="#">Departments</a>
-          <a className='hover:text-teal-600 text-xl font-bold' href="#">Doctors</a>
-          <a className='hover:text-teal-600 text-xl font-bold' href="#">About us</a>
+          <a className='hover:text-teal-600 text-sm md:text-xl font-bold' href="#">Home</a>
+          <a className='hover:text-teal-600 text-sm md:text-xl font-bold' href="#">Departments</a>
+          <a className='hover:text-teal-600 text-sm md:text-xl font-bold' href="#">Doctors</a>
+          <a className='hover:text-teal-600 text-sm md:text-xl font-bold' href="#">About us</a>
         </div>
         <div className="flex-none">
           {profile ? (
@@ -47,10 +47,10 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="space-x-3">
-              <Link className="btn btn-error" to="/login">
+              <Link className="bg-blue-400 hover:bg-blue-500 border outline-none rounded-md py-3 w-full px-4 font-semibold text-white" to="/login">
                 <span className='text-xl font-bold'>Login</span>
               </Link>
-              <Link className="btn btn-primary" to="/register">
+              <Link className="bg-blue-400 hover:bg-blue-500 border outline-none rounded-md py-3 w-full px-4 font-semibold text-white" to="/register">
                 <span className='text-xl font-bold'>Register</span>
               </Link>
             </div>

@@ -12,7 +12,7 @@ const Header = () => {
     
   </div>
   <div className="flex-none">
-  <button className="btn btn-error"><span className='text-xl font-bold '>Emergency Contact</span></button>
+  <button className="bg-red-400 hover:bg-red-600 border outline-none rounded-md py-3 w-full px-4 font-semibold text-white"><span className='text-xl font-bold '>Emergency Contact</span></button>
   </div>
 </div>
     </div>
