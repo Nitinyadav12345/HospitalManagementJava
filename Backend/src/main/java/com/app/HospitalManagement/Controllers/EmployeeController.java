@@ -1,6 +1,7 @@
 package com.app.HospitalManagement.Controllers;
 
 import com.app.HospitalManagement.dto.EmployeeDto;
+import com.app.HospitalManagement.dto.EmployeeUpdate;
 import com.app.HospitalManagement.response.ApiResponseSuccess;
 import com.app.HospitalManagement.services.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +21,16 @@ public class EmployeeController {
     public ResponseEntity<?> registerEmployee(@RequestBody EmployeeDto employeeDto){
         log.info("inside the function register Employee {}" , employeeDto);
         ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
-        try{
-            response.setData(employeeService.registerEmployee(employeeDto));
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
+        response.setData(employeeService.registerEmployee(employeeDto));
         return  ResponseEntity.ok(response);
     }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> updateEmployee(@RequestBody EmployeeUpdate employeeDto){
+        log.info("inside the function updateEmployee {}",employeeDto);
+        ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
+        response.setData(employeeService.updateEmployee(employeeDto));
+        return ResponseEntity.ok(response);
+    }
+
 }
