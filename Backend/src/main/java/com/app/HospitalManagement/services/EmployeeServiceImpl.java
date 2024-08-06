@@ -11,12 +11,12 @@ import com.app.HospitalManagement.repositories.UserRepositiory;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolationException;
-
-import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -31,17 +31,20 @@ public class EmployeeServiceImpl implements  EmployeeService{
         private ModelMapper modelMapper;
 
         @Override
-        public String registerEmployee(EmployeeDto employeeDto) {
+        public String registerEmployee(EmployeeDto employeeDto){
                 log.info("inside the function registerEmployee {}" , employeeDto);
                 Long id = employeeDto.getUserid();
                 UserEntity user = userRepositiory.findById(id).orElseThrow(()->new NoRecordFoundException("User Does not exist"));
+                Optional<EmployeeEntity> checkEmpExist = employeeRepositiory.findByUserId(id,EmployeeEntity.class);
+                log.info("{}" ,checkEmpExist);
+                System.out.println(checkEmpExist);
+                if(!checkEmpExist.isEmpty()){
+                        return "Employee already Exist";
+                }
                 EmployeeEntity employee = modelMapper.map(employeeDto , EmployeeEntity.class);
                 employee.setUser(user);
-                try{
-                        employeeRepositiory.save(employee);
-                }catch (Exception ex){
-                       return "Some Sql error occurred";
-                }
+                employeeRepositiory.save(employee);
+
                 return "Employee added Successfully";
         }
 
@@ -54,11 +57,20 @@ public class EmployeeServiceImpl implements  EmployeeService{
                 System.out.println(user);
                 EmployeeEntity employee1 =  modelMapper.map(employeeDto ,EmployeeEntity.class);
                 employee1.setUser(user);
-                try {
-                        employeeRepositiory.save(employee1);
-                }catch (Exception ex){
-                        return ex.getLocalizedMessage();
-                }
+                employeeRepositiory.save(employee1);
                 return "User updated Successfully";
+        }
+
+        @Override
+        public List<EmployeeEntity> getAllEmployees() {
+                List<EmployeeEntity> emplist = employeeRepositiory.findAll();
+                return emplist;
+        }
+
+        @Override
+        public String deleteEmployee(Long id) {
+                log.info("inside the function deleteEmployee {}" ,id);
+                employeeRepositiory.deleteById(id);
+                return "Employee deleted Successfully";
         }
 }
