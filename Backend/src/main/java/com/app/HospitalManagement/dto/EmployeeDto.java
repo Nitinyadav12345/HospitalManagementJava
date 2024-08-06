@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class EmployeeDto {
     private Long id;
-    private double fees;
+   
     private LocalDate doj;
     private LocalDate dob;
     private double salary;

@@ -90,7 +90,7 @@ const SidebarP = () => {
           {/* here render the pages  */}
           <Routes>
             <Route  path="/" element={<Dashboard/>}></Route>
-            <Route path="addemp" element={<AddEmployee/>}/>
+            <Route  path="/addemp" element={<AddEmployee/>}></Route>
           </Routes>
         </div>
       </div>
