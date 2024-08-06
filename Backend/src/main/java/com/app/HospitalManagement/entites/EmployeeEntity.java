@@ -23,6 +23,6 @@ public class EmployeeEntity {
     private LocalDate dob;
     private double salary;
     @OneToOne
-    @JoinColumn(name = "userID")
+    @JoinColumn(name = "userID",unique = true,nullable = false)
     private UserEntity user;
 }
