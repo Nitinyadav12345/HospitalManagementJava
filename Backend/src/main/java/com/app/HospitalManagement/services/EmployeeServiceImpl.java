@@ -30,6 +30,9 @@ public class EmployeeServiceImpl implements  EmployeeService{
         @Autowired
         private ModelMapper modelMapper;
 
+        //have to change the fucntions b/z i have to register in both user table and emp table have
+        //to chanege the employee dto
+
         @Override
         public String registerEmployee(EmployeeDto employeeDto){
                 log.info("inside the function registerEmployee {}" , employeeDto);

@@ -1,19 +1,10 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { toast } from 'react-toastify';
 
 const Register = () => {
-  
-  const [name , setName] = useRef("");
-  const [phone , setPhone] = useState("");
-  const [confirmPassword , setConfirmPassword] = useState("");
-  const email = useRef('');
-  const password = useRef('')
-
-  
   return (
     <>
-      <div class="flex justify-center items-center md:h-screen  p-10 ">
+      <div class="flex justify-center items-center md:h-screen p-10 ">
         <div class="grid md:grid-cols-2 grid-cols-1  border rounded-3xl">
           <div class="flex justify-center items-center p-5">
             <form action="">
@@ -21,43 +12,31 @@ const Register = () => {
                 REGISTER HERE
               </h1>
               <input
-                value={email.current}
-                onChange={(e) => (email.current = e.target.value)}
                 type="email"
                 class=" bg-gray-100 border outline-none rounded-md py-3 w-full px-4 mb-3"
                 placeholder="Email"
               />
               <input
-              onChange={(e)=>{
-                setName(e.target.value)
-              }}
                 type="text"
                 class=" bg-gray-100 border outline-none rounded-md py-3 w-full px-4 mb-3"
-                placeholder="Name"
+                placeholder="First Name"
               />
-             
               <input
-              onChange={(e)=>{
-                setName(e.target.value)
-              }}
+                type="text"
+                class=" bg-gray-100 border outline-none rounded-md py-3 w-full px-4 mb-3"
+                placeholder="Last Name"
+              />
+              <input
                 type="Password"
                 class=" bg-gray-100 border outline-none rounded-md py-3 w-full px-4 mb-3"
                 placeholder="Password"
               />
               <input
-              onChange={(e)=>{
-                setName(e.target.value)
-              }}
                 type="Password"
                 class=" bg-gray-100 border outline-none rounded-md py-3 w-full px-4 mb-3"
                 placeholder="Confirm Password"
               />
-              <input
-                type="text"
-                class=" bg-gray-100 border outline-none rounded-md py-3 w-full px-4 mb-3"
-                placeholder="Phone"
-              />
-              <div className="flex mb-4">
+              <div className="flex">
                 <button
                   type="submit"
                   class=" bg-blue-400 hover:bg-blue-500 border outline-none rounded-md py-3 w-full px-4 font-semibold text-white"

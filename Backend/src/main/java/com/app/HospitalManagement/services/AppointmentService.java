@@ -6,7 +6,4 @@ public interface AppointmentService {
     
     List<AppointmentEntity> getAllAppointments();
 
-    
-
-
 }
