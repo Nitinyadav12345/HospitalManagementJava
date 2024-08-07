@@ -5,6 +5,7 @@ import com.app.HospitalManagement.repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ObjectInputFilter;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,16 +26,21 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public String updateAppointment(Long appointmentId, Status newStatus) { 
+    public String updateAppointmentStatus(Long appointmentId, Status newStatus) {
         Optional<AppointmentEntity> optionalAppointment = appointmentRepository.findById(appointmentId);
-        
+
         if (optionalAppointment.isPresent()) {
             AppointmentEntity appointment = optionalAppointment.get();
-            appointment.setStatus(newStatus);  
+            appointment.setStatus(newStatus);
             appointmentRepository.save(appointment);
             return "Appointment status updated successfully.";
         } else {
             return "Appointment not found.";
         }
+    }
+
+    @Override
+    public List<AppointmentEntity> getAllApointment() {
+        return List.of();
     }
 }

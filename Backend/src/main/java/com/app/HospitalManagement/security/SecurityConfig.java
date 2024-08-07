@@ -32,7 +32,7 @@ public class SecurityConfig {
     @Autowired
     private CustomAuthenticationEntryPoint authEntry;
 
-    
+
     @Bean
     public SecurityFilterChain authorizeRequests(HttpSecurity http) throws Exception
     {
@@ -48,8 +48,8 @@ public class SecurityConfig {
                         "/v*/api-doc*/**","/swagger-ui/**","/employee/employees").permitAll()
                 // only required for JS clnts (react / angular) : for the pre flight requests
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
-                //TO PERMIT THE API FOR ROLE BASED 
-                .antMatchers("/products/purchase/**").hasAuthority("CUSTOMER")
+                //TO PERMIT THE API FOR ROLE BASED
+                .antMatchers("/appointment/updatestatus").hasAuthority("DOCTOR")
                 .antMatchers("/medicene/add").hasAuthority("CHEMIST")
                 .antMatchers("/employee/register" , "/employee/update","/employee/delete/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()

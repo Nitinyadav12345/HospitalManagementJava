@@ -1,15 +1,13 @@
 package com.app.HospitalManagement.dto;
-import java.time.LocalDate;
 
+import com.app.HospitalManagement.entites.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppointmentDto {
+public class AppointmentStatusDto {
 private Status status;
-private LocalDate appdate;
-    
-
+private Long id;
 }

@@ -22,7 +22,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerEmployee(@RequestBody EmployeeDto employeeDto) throws Exception {
+    public ResponseEntity<?> registerEmployee(@RequestBody EmployeeDto employeeDto)  {
         log.info("inside the function register Employee {}" , employeeDto);
         ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
         try {
