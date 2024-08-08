@@ -34,8 +34,7 @@ public class PatientEntity {
     private LocalDate doa;
     private LocalDate dod;
     private boolean isadmit;
-    private boolean isdoctorvisited;
-    @OneToMany
-    @JoinColumn(name="DID")
-    private List<DoctorEntity> doclist;
+    @OneToOne
+    @JoinColumn(name="doctorID")
+    private DoctorEntity doctor;
 }

@@ -34,10 +34,10 @@ public class DoctorServiceImpl implements DoctorService {
         log.info("inside the function registerDoctor {}", doctorDto);
         Long id = doctorDto.getEmpid();
         EmployeeEntity employee = employeeRepositiory.findById(id)
-                .orElseThrow(() -> new NoRecordFoundException("Doctor does not exist"));
+                .orElseThrow(() -> new NoRecordFoundException("Employee does not exist"));
         DoctorEntity doctor = modelMapper.map(doctorDto, DoctorEntity.class);
         doctor.setEmployee(employee);
         doctorRepositiory.save(doctor);
-        return "Doctor added successfully";
+        return "Doctor added sucdcessfully";
     }
 }

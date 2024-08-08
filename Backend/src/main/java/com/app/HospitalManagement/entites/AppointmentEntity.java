@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Table(name = "Appointments")
 public class AppointmentEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
-private Status status;
+    private Status status;
     private LocalDate appdate;
     @ManyToOne
     @JoinColumn(name = "doctorID")

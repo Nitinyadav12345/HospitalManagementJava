@@ -45,7 +45,7 @@ public class SecurityConfig {
                 authorizeRequests()
                 //TO PERMIT THE API FOR aLL USERS
                 .antMatchers("/products/view","/users/signup","/users/signin","/user/login","/user/register",
-                        "/v*/api-doc*/**","/swagger-ui/**","/employee/employees").permitAll()
+                        "/v*/api-doc*/**","/swagger-ui/**","/employee/employees","/patient/register").permitAll()
                 // only required for JS clnts (react / angular) : for the pre flight requests
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 //TO PERMIT THE API FOR ROLE BASED

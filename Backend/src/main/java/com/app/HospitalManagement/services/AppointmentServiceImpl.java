@@ -1,7 +1,9 @@
 package com.app.HospitalManagement.services;
+import com.app.HospitalManagement.dto.AppointmentDtoInsert;
 import com.app.HospitalManagement.entites.AppointmentEntity;
 import com.app.HospitalManagement.entites.Status;  
 import com.app.HospitalManagement.repositories.AppointmentRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,19 @@ public class AppointmentServiceImpl implements AppointmentService {
    
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+    private DoctorService doctorService;
+//    @Autowired
+//    private PatientService patientService;
+
+    @Autowired
+    private ModelMapper model;
+
+
+    @Override
+    public String insertAppointment(AppointmentDtoInsert appointment) {
+        return "";
+    }
 
     @Override
     public List<AppointmentEntity> getAppointmentByDoctorId(Long doctorId) {
