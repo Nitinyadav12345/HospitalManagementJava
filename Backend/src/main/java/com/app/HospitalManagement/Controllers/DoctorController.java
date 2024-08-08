@@ -30,12 +30,7 @@ public class DoctorController {
         ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
         try{
             String result = doctorService.registerDoctor(doctorDto);
-            if(result.equals("Doctor already Exist")){
-                ApiResponseFailure<String> res = new ApiResponseFailure<>();
-                res.setData(result);
-                return ResponseEntity.badRequest().body(res);
-            }
-
+            response.setData(result);
         }catch (Exception ex){
             ApiResponseFailure<String> res = new ApiResponseFailure<>();
             res.setData(ex.getLocalizedMessage());
