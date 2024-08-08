@@ -33,7 +33,7 @@ public class AppointmentController {
             response.setData(result);
         }catch (Exception ex){
             ApiResponseFailure<String> res = new ApiResponseFailure<>();
-            res.setData("Some Error Occured");
+            res.setData(ex.getLocalizedMessage());
             return ResponseEntity.badRequest().body(res);
         }
         return ResponseEntity.ok(response);
