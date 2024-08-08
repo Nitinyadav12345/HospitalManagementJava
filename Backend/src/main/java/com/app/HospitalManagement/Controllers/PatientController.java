@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/patient")
 @Slf4j
@@ -29,6 +31,23 @@ public class PatientController {
         String result = patientService.registerPatient(patientDto);
         res.setData(result);
         return  ResponseEntity.ok(res);
+    }
 
+    @GetMapping("/patients")
+    public ResponseEntity<?> getAllPatients(){
+        log.info("inside the function get all patients");
+        ApiResponseSuccess<List<PatientEntity>> response = new ApiResponseSuccess<>();
+        List<PatientEntity> patientEntities = patientService.getAllPatient();
+        response.setData(patientEntities);
+        return ResponseEntity.ok(patientEntities);
+    }
+
+    @GetMapping("/update/{id}/{did}")
+    public ResponseEntity<?> appointDoctor(@PathVariable(name = "id") Long id ,@PathVariable(name = "did") Long did){
+        log.info("inside the function get all Doctors");
+        ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
+        String msg = patientService.appointDoctor(id,did);
+        response.setData(msg);
+        return ResponseEntity.ok(response);
     }
 }

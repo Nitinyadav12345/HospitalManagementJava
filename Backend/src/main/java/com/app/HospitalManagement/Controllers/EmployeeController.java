@@ -51,7 +51,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("employees")
+    @GetMapping("/employees")
     public ResponseEntity<?> allEmployee(){
         log.info("inside the function allEmployee ");
         ApiResponseSuccess<List<EmployeeEntity>> response = new ApiResponseSuccess<>();

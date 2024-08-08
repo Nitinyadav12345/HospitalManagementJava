@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,7 +29,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private EmployeeRepositiory employeeRepositiory;
 
-    //this getting the error we can do this late Doctor entity later
+
     @Override
     public String registerDoctor(DoctorDto doctorDto) {
         log.info("inside the function registerDoctor {}", doctorDto);
@@ -39,5 +40,10 @@ public class DoctorServiceImpl implements DoctorService {
         doctor.setEmployee(employee);
         doctorRepositiory.save(doctor);
         return "Doctor added sucdcessfully";
+    }
+
+    @Override
+    public List<DoctorEntity> getDoctors() {
+        return doctorRepositiory.findAll();
     }
 }
