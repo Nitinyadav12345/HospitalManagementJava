@@ -1,18 +1,20 @@
 {
   "homepage": "https://github.com/Nitinyadav12345/github.io/HospitalManagementJava",
   "name": "HospitalManagementSystem",
-  "private":"true",
+  "private": "true",
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d dist",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@esbuild/win32-x64": "^0.23.0",
     "axios": "^1.7.3",
+    "esbuild": "^0.18.20",
     "gh-pages": "^6.1.1",
     "react": "^18",
     "react-dom": "^18",
