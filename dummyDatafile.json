@@ -2,70 +2,70 @@
     {
       "name": "Alice Smith",
       "email": "alice.smith@example.com",
-      "password": "password1",
+      "password": "password@1",
       "phoneNumber": "123-456-7891",
       "role": "DOCTOR"
     },
     {
       "name": "Bob Johnson",
       "email": "bob.johnson@example.com",
-      "password": "password2",
+      "password": "password@2",
       "phoneNumber": "123-456-7892",
       "role": "ADMIN"
     },
     {
       "name": "Cathy Brown",
       "email": "cathy.brown@example.com",
-      "password": "password3",
+      "password": "password@3",
       "phoneNumber": "123-456-7893",
       "role": "PATIENT"
     },
     {
       "name": "David Wilson",
       "email": "david.wilson@example.com",
-      "password": "password4",
+      "password": "password@4",
       "phoneNumber": "123-456-7894",
       "role": "PATIENT"
     },
     {
       "name": "Eva Davis",
       "email": "eva.davis@example.com",
-      "password": "password5",
+      "password": "password@5",
       "phoneNumber": "123-456-7895",
       "role": "RECEPTIONIST"
     },
     {
       "name": "Frank Miller",
       "email": "frank.miller@example.com",
-      "password": "password6",
+      "password": "password@6",
       "phoneNumber": "123-456-7896",
       "role": "RECEPTIONIST"
     },
     {
       "name": "Grace Taylor",
       "email": "grace.taylor@example.com",
-      "password": "password7",
+      "password": "password@7",
       "phoneNumber": "123-456-7897",
       "role": "DOCTOR"
     },
     {
       "name": "Henry Anderson",
       "email": "henry.anderson@example.com",
-      "password": "password8",
+      "password": "password@8",
       "phoneNumber": "123-456-7898",
       "role": "CHEMIST"
     },
     {
       "name": "Ivy Martinez",
       "email": "ivy.martinez@example.com",
-      "password": "password9",
+      "password": "password@9",
       "phoneNumber": "123-456-7899",
       "role": "PATIENT"
     },
     {
       "name": "Jack Garcia",
       "email": "jack.garcia@example.com",
-      "password": "password10",
+      "password": "password@10",
       "phoneNumber": "123-456-7890",
       "role": "USER"
     }

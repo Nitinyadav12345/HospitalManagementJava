@@ -37,7 +37,7 @@ public class JwtUtils {
         CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
         //JWT : username ,issued at , expdate,digital Signature(does not typically passwords,can contains authorities
         return Jwts.builder()//JWTS a factory class used to create JWT tokens
-                .setSubject(userPrincipal.getPassword())//setting subject part of the token(typically user,email
+                .setSubject(userPrincipal.getUsername())//setting subject part of the token(typically user,email
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime()//sets the JWT Claims exp
                 +jwtExpirationMs))//setting a custom claims

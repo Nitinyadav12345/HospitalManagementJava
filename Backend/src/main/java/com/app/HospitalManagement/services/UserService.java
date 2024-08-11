@@ -5,5 +5,6 @@ import com.app.HospitalManagement.entites.UserEntity;
 
 public interface UserService {
     public String registerUser(RegisterDto user);
-
+    public String updateImageUser(RegisterDto user);
+    public byte[] getUserImage();
 }

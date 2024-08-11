@@ -11,26 +11,21 @@ const ScheApp = () => {
   const departments = ["opd1" , "opd2" , "opd3"];
 
   return (
-    <div>
+    
+    <div className=" container">
       <center>
-        <h1 className="text-2xl font-bold">Get Your Appointment</h1>
-      </center>
-      <center>
-      <form class="w-full max-w-sm mt-5">
-        
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
-            >
-              Select Department
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <select
+         <h1 className="text-2xl font-bold">Get Your Appointment</h1>
+     </center>
+      <div className ="flex items-center justify-center p-12">
+    <div className ="mx-auto w-full max-w-full ">
+        <form>
+            <div className ="mb-5">
+                <label for="name" className ="mb-3 block text-base font-medium text-[#07074D] text-center">
+                    Departments
+                </label>
+                <select
               id="countries"
-              class="bg-gray-200 border border-gray-300 text-sm rounded-lg block w-full p-2.5 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className ="bg-gray-200 border border-gray-300 text-sm rounded-lg block w-full p-2.5 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             >
               {
                 departments.map((department)=>{
@@ -38,21 +33,14 @@ const ScheApp = () => {
                 })
               }
             </select>
-          </div>
-        </div>
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
-            >
-              Select Doctor
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <select
+            </div>
+            <div className ="mb-5">
+                <label for="phone" className ="mb-3 block text-base font-medium text-[#07074D] text-center">
+                    Doctors List
+                </label>
+                <select
               id="countries"
-              class="bg-gray-200 border border-gray-300 text-sm rounded-lg block w-full p-2.5 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className ="bg-gray-200 border border-gray-300 text-sm rounded-lg block w-full p-2.5 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             >
               {
                 doctors.map((doctor)=>{
@@ -60,62 +48,36 @@ const ScheApp = () => {
                 })
               }
             </select>
-          </div>
-        </div>
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-password"
-            >
-              Date
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="inline-password"
-              type="date"           
-            />
-          </div>
-        </div>
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-password"
-            >
-              Problem 
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <textarea
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                         
-            />
-          </div>
-        </div>
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3"></div>
-          <label class="md:w-2/3 block text-gray-500 font-bold">
-            <input class="mr-2 leading-tight" type="checkbox" />
-            <span class="text-sm">Send me your newsletter!</span>
-          </label>
-        </div>
-        <div class="md:flex md:items-center">
-          <div class="md:w-1/3"></div>
-          <div class="md:w-2/3">
-            <button
-              class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-              type="button"
-            >
-              Book Appointment
-            </button>
-          </div>
-        </div>
-      </form>
-      </center>
-      
+            </div>
+            <div className ="-mx-3 flex flex-wrap">
+                <div className ="w-full px-3 sm:w-1/2">
+                    <div className ="mb-5">
+                        <label for="date" className ="mb-3 block text-base font-medium text-[#07074D] text-center">
+                            Date
+                        </label>
+                        <input type="date" name="date" id="date"
+                            className ="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                    </div>
+                </div>
+                <div className ="w-full px-3 sm:w-1/2">
+                    <div className ="mb-5">
+                        <label for="time" className ="mb-3 block text-base font-medium text-[#07074D] text-center">
+                            Time
+                        </label>
+                        <input type="time" name="time" id="time"
+                            className ="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button
+                    className ="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                    Book Appointment
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
     </div>
   );
 };

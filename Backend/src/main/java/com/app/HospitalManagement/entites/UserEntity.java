@@ -31,4 +31,7 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Role role;
+    @Lob
+    @Column(columnDefinition = "mediumblob")
+    private byte[] userImage;
 }

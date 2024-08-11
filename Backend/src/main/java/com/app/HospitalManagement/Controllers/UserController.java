@@ -9,6 +9,7 @@ import com.app.HospitalManagement.security.JwtUtils;
 import com.app.HospitalManagement.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -52,5 +53,15 @@ public class UserController {
         ApiResponseToken responseToken = new ApiResponseToken("Success",jwtToken);
         return ResponseEntity.ok(responseToken);
     }
-
+    @GetMapping("/profileImage")
+    public byte[] getUserImage(){
+        log.info("inside the getuserimage method ");
+        return userService.getUserImage();
+    }
+    @PostMapping("/profileImage")
+    public ResponseEntity updateUserImage(@ModelAttribute RegisterDto user){
+        ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
+        String res = userService.updateImageUser(user);
+        return ResponseEntity.ok(response);
+    }
 }

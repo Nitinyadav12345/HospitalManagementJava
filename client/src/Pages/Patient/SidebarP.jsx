@@ -7,7 +7,7 @@ import Prescription from "./Prescription";
 
 const SidebarP = () => {
   const menu = [
-    { name: "Schedule Appointment", path: "" },
+    { name: "Book Appointment", path: "" },
     { name: "Appointment History", path: "history" },
     { name: "Prescription", path: "getpres" }
   ];
