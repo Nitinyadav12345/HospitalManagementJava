@@ -31,10 +31,4 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    //image bytes can have large lengths so we specify a value
-    //which is more than the default length for picByte column
-    @Column(name="picByte" , length = 1000)
-    private byte[] picByte;
-
-
 }

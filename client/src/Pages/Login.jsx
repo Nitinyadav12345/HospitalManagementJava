@@ -48,6 +48,7 @@ const Login = () => {
           if(route){
             navigate(route);
           }
+          dispatch(loginAction);
         }else if(result.status = "error"){
           toast.error(result.data + " Login failed");
         }

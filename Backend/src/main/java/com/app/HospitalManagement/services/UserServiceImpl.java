@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService{
     @Override
     public String registerUser(RegisterDto user) {
         log.info("inside user register user {}",user);
-
         user.setPassword(encoder.encode(user.getPassword()));
         UserEntity user1 = mapper.map(user,UserEntity.class);
         if(userRepositiory.existsByEmail(user.getEmail())){
