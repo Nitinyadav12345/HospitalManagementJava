@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(true);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const loginStatus = useSelector((state) => state.user.loginStatus);
 
-  // Toggle the menu visibility
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Toggle profile dropdown visibility
   const toggleProfile = () => {
     setProfileOpen(!profileOpen);
   };
 
   return (
-    <nav className="py-2.5 container ">
+    <nav className="py-2.5 container">
       <div className="flex flex-wrap items-center justify-evenly max-w-screen-xl px-4 mx-auto">
         <div className="flex items-center">
-          {/* Toggle Button */}
           <button
             data-collapse-toggle="mobile-menu"
             type="button"
-            className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="mobile-menu"
             aria-expanded={isMenuOpen}
             onClick={toggleMenu}
@@ -56,56 +55,41 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Navigation Links */}
         <div
           className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? 'block' : 'hidden'}`}
           id="mobile-menu"
         >
           <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
             <li>
-              <a
-                href='#'
-                className="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0 dark:text-white"
-                aria-current="page"
-              >
+              <Link to="/" className="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href='#'
-                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
+              <Link to="/departments" className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0">
                 Departments
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href='#'
-                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
+              <Link to="/doctors" className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0">
                 Doctors
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href='#'
-                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-              >
+              <Link to="/about" className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0">
                 About Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
-        {/* Profile or Auth Links */}
         <div className="flex-none mt-2 md:mt-0 flex items-center space-x-3">
-          {profileOpen ? (
+          {loginStatus ? (
             <div className="relative">
               <button
                 className="btn btn-ghost btn-circle avatar"
-                onClick={toggleProfile}
                 aria-label="Profile"
+                onClick={toggleProfile}
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden">
                   <img

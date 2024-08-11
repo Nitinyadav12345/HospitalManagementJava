@@ -2,6 +2,7 @@ package com.app.HospitalManagement.Controllers;
 
 import com.app.HospitalManagement.dto.LoginDto;
 import com.app.HospitalManagement.dto.RegisterDto;
+import com.app.HospitalManagement.entites.UserEntity;
 import com.app.HospitalManagement.response.ApiResponseSuccess;
 import com.app.HospitalManagement.response.ApiResponseToken;
 import com.app.HospitalManagement.security.JwtUtils;
@@ -14,7 +15,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.ByteArrayOutputStream;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 @RestController
 @RequestMapping("/user")
 @CrossOrigin

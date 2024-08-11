@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  
   return (
     <>
       <div class="flex justify-center items-center md:h-screen p-10 ">

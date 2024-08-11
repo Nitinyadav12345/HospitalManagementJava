@@ -36,4 +36,5 @@ public class UserServiceImpl implements UserService{
         userRepositiory.save(user1);
         return "User Added Successfully";
     }
+    
 }

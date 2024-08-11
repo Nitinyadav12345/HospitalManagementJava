@@ -1,6 +1,7 @@
 import Home from './Pages/Home'
 import './App.css';
 import { Route ,Routes } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import SidebarP from './Pages/Patient/SidebarP';
