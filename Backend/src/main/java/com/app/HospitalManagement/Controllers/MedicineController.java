@@ -6,8 +6,10 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import com.app.HospitalManagement.entites.MedicineEntity;
+import com.app.HospitalManagement.repositories.MedicineRepository;
 import com.app.HospitalManagement.response.ApiResponseSuccess;
 import com.app.HospitalManagement.services.FileStorageService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ import org.yaml.snakeyaml.util.EnumUtils;
 @RestController
 @RequestMapping("/chemist/medicine")
 @CrossOrigin
+@Slf4j
 public class MedicineController {
 	
 	@Autowired
@@ -32,6 +35,9 @@ public class MedicineController {
 	private FileStorageService fileStorageService;
 	@Autowired
 	private ModelMapper modelMapper;
+	@Autowired
+	private MedicineRepository medicineRepository;
+
 	//post add medicine
 		@PostMapping("/insert")
 		public ResponseEntity<?> insertMedicine(@ModelAttribute MedicineDto medicineDTO)  {
@@ -72,14 +78,16 @@ public class MedicineController {
 		{
 			return ResponseEntity.ok(this.medicineService.getMedicine(id));
 		}
-
-	@GetMapping("/{id}/photo")
+	// THIS API IS NOT WORKING I WILL WORK ON IT LATER
+	@GetMapping("/photo/{id}")
 	public ResponseEntity<Resource> getMedicinePhoto(@PathVariable Long id) {
-		MedicineDto medicine = medicineService.getMedicine(id);
-		MedicineEntity med = modelMapper.map(medicine,MedicineEntity.class);
+
+		MedicineEntity medicine = medicineRepository.findById(id).orElseThrow();
+		log.error("{}" , medicine);
+		System.out.println(medicine.getPhoto());
 		Resource file = null;
 		try{
-			file = fileStorageService.loadFile(med.getPhoto());
+			file = fileStorageService.loadFile(medicine.getPhoto());
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}

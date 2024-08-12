@@ -1,6 +1,7 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import config, { config2 } from "../config";
+import { toast } from "react-toastify";
 const MedicineCard = ({
   id,
   name,
@@ -9,36 +10,48 @@ const MedicineCard = ({
   expiryDate,
   manufacturer,
   imagePath,
+  deleteHandler,
 }) => {
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
-    const fetchPhoto = async () => {
+    // Function to fetch image URL
+    const fetchImage = async () => {
       try {
         const token = sessionStorage.getItem("token");
         const response = await axios.get(
-          `${config2.url}/chemist/medicine/${id}/photo`,
+          `${config2.url}/chemist/medicine/photo/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-            responseType: "blob", // Ensure we get the image as a Blob
+            responseType: "blob", // Ensures that the response is treated as a binary large object (Blob)
           }
         );
-
-        const url = URL.createObjectURL(response.data);
-        setPhotoUrl(url);
+        // Create a URL for the image blob
+        const imageUrl = URL.createObjectURL(response.data);
+        setImageSrc(imageUrl);
       } catch (error) {
-        console.error("Failed to load the image", error);
+        console.error("Error fetching the image", error);
       }
     };
 
-    fetchPhoto();
+    fetchImage();
   }, [id]);
+
+  const handleDelete = async () => {
+    try {
+      await deleteHandler({ id });
+      window.location.reload();
+      toast.success("Medicine deleted successfully");
+    } catch (error) {
+      toast.error("Failed to delete the item:");
+    }
+  };
   return (
     <div className="card bg-base-100 w-64 shadow-xl relative">
       <figure>
-        <img src=" "  alt={name} />
+        <img src={imageSrc} alt={name} />
       </figure>
       <div className="card-body">
         <h2 className="card-title font-bold">{name}</h2>
@@ -64,7 +77,7 @@ const MedicineCard = ({
       {/* Cancel Button */}
       <button
         className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-[50%]"
-        onClick={() => console.log("Cancel button clicked")}
+        onClick={handleDelete}
       >
         X
       </button>

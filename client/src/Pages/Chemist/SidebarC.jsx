@@ -4,15 +4,17 @@ import { Route, Routes } from "react-router-dom";
 import ViewStock from "./ViewStock";
 import MedicineForm from "./MedicineForm";
 
-
 const SidebarP = () => {
-
-    const menu = [{name:"View Stock",path:""} ,{name:"Add Mediciene",path:"addmed"} ,{name:"Medicine Bill" ,path:"medbill"}];
+  const menu = [
+    { name: "View Stock", path: "" },
+    { name: "Add Mediciene", path: "addmed" },
+    { name: "Medicine Bill", path: "medbill" },
+  ];
 
   return (
-    <div class="flex h-screen bg-pink-100">
-      <div class="hidden md:flex flex-col w-64 bg-pink-500">
-        <div class="flex items-center justify-center h-16 bg-pink-900">
+    <div className="flex h-screen bg-pink-100">
+      <div className="hidden md:flex flex-col w-64 bg-pink-500">
+        <div className="flex items-center justify-center h-16 bg-pink-900">
           <div className="flex-1">
             <a className="btn btn-ghost text-xl">
               <img
@@ -24,23 +26,19 @@ const SidebarP = () => {
             </a>
           </div>
         </div>
-        <div class="flex flex-col flex-1 overflow-y-auto">
-          <nav class="flex-1 px-2 py-4 bg-pink-800">
-            
-           {
-            menu.map((obj)=>{
-                return <SidebarMenu name={obj.name} path={obj.path}/>
-            })
-           }
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <nav className="flex-1 px-2 py-4 bg-pink-800">
+            {menu.map((obj) => {
+              return <SidebarMenu name={obj.name} path={obj.path} />;
+            })}
           </nav>
         </div>
-        
       </div>
 
-      <div class="flex flex-col flex-1 overflow-y-auto">
-        <div class="flex items-center justify-between md:justify-end  h-16 bg-white border-b border-pink-200">
-          <div class="flex items-center px-4 md:hidden">
-            <button class="text-pink-500 focus:outline-none focus:text-pink-700">
+      <div className="flex flex-col flex-1 overflow-y-auto">
+        <div className="flex items-center justify-between md:justify-end  h-16 bg-white border-b border-pink-200">
+          <div className="flex items-center px-4 md:hidden">
+            <button className="text-pink-500 focus:outline-none focus:text-pink-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6"
@@ -56,9 +54,8 @@ const SidebarP = () => {
                 />
               </svg>
             </button>
-           
           </div>
-          <div class="flex items-center pr-4 md:items-end">
+          <div className="flex items-center pr-4 md:items-end">
             {/* this is profile part */}
             <div className="dropdown dropdown-end">
               <div
@@ -81,8 +78,12 @@ const SidebarP = () => {
                     <span className="badge">New</span>
                   </a>
                 </li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <a>Logout</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -90,8 +91,8 @@ const SidebarP = () => {
         <div class="p-4">
           {/* here render the pages  */}
           <Routes>
-            <Route path="" element={<ViewStock/>}></Route>
-            <Route path="addmed" element={<MedicineForm/>} ></Route>
+            <Route path="" element={<ViewStock />}></Route>
+            <Route path="addmed" element={<MedicineForm />}></Route>
           </Routes>
         </div>
       </div>

@@ -1,10 +1,9 @@
 import axios from "axios";
 import config, { config2 } from "../config";
 
-const token = sessionStorage.getItem("token");
-
 export async function insertMedicine(formData) {
   console.log(formData);
+  const token = sessionStorage.getItem("token");
   const result = await axios.post(
     `${config2.url}/chemist/medicine/insert`,
     formData,
@@ -20,7 +19,18 @@ export async function insertMedicine(formData) {
 }
 
 export async function getAllMedicine() {
+  const token = sessionStorage.getItem("token");
   const result = await axios.get(`${config2.url}/chemist/medicine`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return result;
+}
+
+export async function deleteMedicine({ id }) {
+  const token = sessionStorage.getItem("token");
+  const result = await axios.delete(`${config2.url}/chemist/medicine/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

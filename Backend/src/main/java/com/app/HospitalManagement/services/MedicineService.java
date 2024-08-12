@@ -17,6 +17,4 @@ public interface MedicineService
 	MedicineDto getMedicine(Long id);
 	//get all medicine
 	List<MedicineEntity> getAllMedicines();
-	
-	
 }

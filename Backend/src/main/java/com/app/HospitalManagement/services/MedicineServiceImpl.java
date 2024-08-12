@@ -40,8 +40,7 @@ public class MedicineServiceImpl implements MedicineService {
 			exception.printStackTrace();
 		}
 		MedicineEntity medicine = modelMapper.map(medicineDTO,MedicineEntity.class);
-		MedicineEntity m =  medicineRepository.save(medicine);
-		log.info("{}" , m);
+		medicine.setPhoto(photoPath);
 		return medicineRepository.save(medicine);
 	}
 
@@ -54,7 +53,6 @@ public class MedicineServiceImpl implements MedicineService {
 
 	@Override
 	public MedicineDto updateQuantity(MedicineDto medicineDto, Long id) {
-		// TODO Auto-generated method stub
 		MedicineEntity medicineEntity=this.medicineRepository.findById(id)
 				.orElseThrow(()->new ResourceNotFoundException("user"," Id",id));
 		MedicineEntity updatedMedicineEntity=this.medicineRepository.save(medicineEntity);
@@ -75,5 +73,4 @@ public class MedicineServiceImpl implements MedicineService {
 		List<MedicineEntity> medicines=this.medicineRepository.findAll();
 		return medicines;
 	}
-
 }

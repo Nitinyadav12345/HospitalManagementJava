@@ -1,6 +1,7 @@
 package com.app.HospitalManagement.services;
 
 import com.app.HospitalManagement.exception.NoRecordFoundException;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -27,10 +28,25 @@ public class FileStorageService {
     //	at com.app.HospitalManagement.services.FileStorageService.saveFile(FileStorageService.java:31)
     public String saveFile(MultipartFile file) throws IOException {
         // Ensure the upload directory exists
+        if (uploadDir == null) {
+            throw new IllegalStateException("Upload directory not configured");
+        }
         Files.createDirectories(Paths.get(uploadDir));
+        System.out.println("Upload Directory: " + uploadDir);
+
+        // Get the original filename
+        String originalFilename = file.getOriginalFilename();
+        System.out.println("File Object: " + file);
+        // Check if the filename is valid and not null
+        if (originalFilename == null || originalFilename.isEmpty()) {
+            throw new IllegalArgumentException("Invalid file name");
+        }
+        System.out.println("Original Filename: " + file.getOriginalFilename());
+        // Sanitize the filename
+        String sanitizedFilename = FilenameUtils.getName(originalFilename).replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
 
         // Generate a unique file name
-        String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+        String fileName = UUID.randomUUID().toString() + "_" + sanitizedFilename;
         Path filePath = Paths.get(uploadDir).resolve(fileName);
 
         // Copy the file to the target location
@@ -43,6 +59,9 @@ public class FileStorageService {
 
     // Method to load a file
     public Resource loadFile(String fileName) throws MalformedURLException {
+        if (fileName == null) {
+            throw new IllegalArgumentException("File name cannot be null");
+        }
         Path filePath = Paths.get(uploadDir).resolve(fileName).normalize();
         Resource resource = new UrlResource(filePath.toUri());
         // Check if the resource exists
