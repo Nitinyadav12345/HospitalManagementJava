@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,11 @@ import com.app.HospitalManagement.repositories.MedicineRepository;
 
 import com.app.HospitalManagement.exception.ResourceNotFoundException;
 
+import javax.transaction.Transactional;
+
+@Transactional
 @Service
+@Slf4j
 public class MedicineServiceImpl implements MedicineService {
 
 	@Autowired
@@ -30,10 +35,13 @@ public class MedicineServiceImpl implements MedicineService {
 		String photoPath = null;
 		try{
 			photoPath = fileStorageService.saveFile(medicineDTO.getPhoto());
+			System.out.println(photoPath);
 		}catch (Exception exception){
 			exception.printStackTrace();
 		}
 		MedicineEntity medicine = modelMapper.map(medicineDTO,MedicineEntity.class);
+		MedicineEntity m =  medicineRepository.save(medicine);
+		log.info("{}" , m);
 		return medicineRepository.save(medicine);
 	}
 

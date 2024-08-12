@@ -1,5 +1,6 @@
+import axios from "axios";
 import React from "react";
-
+import config, { config2 } from "../config";
 const MedicineCard = ({
   id,
   name,
@@ -9,10 +10,35 @@ const MedicineCard = ({
   manufacturer,
   imagePath,
 }) => {
+  const [photoUrl, setPhotoUrl] = useState("");
+
+  useEffect(() => {
+    const fetchPhoto = async () => {
+      try {
+        const token = sessionStorage.getItem("token");
+        const response = await axios.get(
+          `${config2.url}/chemist/medicine/${id}/photo`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            responseType: "blob", // Ensure we get the image as a Blob
+          }
+        );
+
+        const url = URL.createObjectURL(response.data);
+        setPhotoUrl(url);
+      } catch (error) {
+        console.error("Failed to load the image", error);
+      }
+    };
+
+    fetchPhoto();
+  }, [id]);
   return (
     <div className="card bg-base-100 w-64 shadow-xl relative">
       <figure>
-        <img src="dn" alt={name} />
+        <img src=" "  alt={name} />
       </figure>
       <div className="card-body">
         <h2 className="card-title font-bold">{name}</h2>
