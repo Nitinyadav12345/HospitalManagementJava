@@ -13,4 +13,6 @@ public class EmployeeUpdate {
     private LocalDate doj;
     private LocalDate dob;
     private double salary;
+    private String charges;
+    private String department;
 }

@@ -1,12 +1,15 @@
 import React from "react";
 import SidebarMenu from "../../Components/SidebarMenu";
-import { Routes , Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import AddEmployee from "./AddEmployee";
 
 const SidebarP = () => {
-
-    const menu = [{name:"Dashboard",path:"" },{name:"Add Employee",path:"addemp"} , {name:"Bills",path:"bills"}];
+  const menu = [
+    { name: "Dashboard", path: "" },
+    { name: "Add Employee", path: "addemp" },
+    { name: "Bills", path: "bills" },
+  ];
 
   return (
     <div class="flex h-screen bg-pink-100">
@@ -25,15 +28,11 @@ const SidebarP = () => {
         </div>
         <div class="flex flex-col flex-1 overflow-y-auto">
           <nav class="flex-1 px-2 py-4 bg-pink-800">
-            
-           {
-            menu.map((obj)=>{
-                return <SidebarMenu name={obj.name} path={obj.path} />
-            })
-           }
+            {menu.map((obj) => {
+              return <SidebarMenu name={obj.name} path={obj.path} />;
+            })}
           </nav>
         </div>
-        
       </div>
 
       <div class="flex flex-col flex-1 overflow-y-auto">
@@ -55,7 +54,6 @@ const SidebarP = () => {
                 />
               </svg>
             </button>
-           
           </div>
           <div class="flex items-center pr-4 md:items-end">
             {/* this is profile part */}
@@ -80,8 +78,12 @@ const SidebarP = () => {
                     <span className="badge">New</span>
                   </a>
                 </li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <a>Logout</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -89,8 +91,8 @@ const SidebarP = () => {
         <div class="p-4">
           {/* here render the pages  */}
           <Routes>
-            <Route  path="/" element={<Dashboard/>}></Route>
-            <Route  path="/addemp" element={<AddEmployee/>}></Route>
+            <Route path="/" element={<Dashboard />}></Route>
+            <Route path="/addemp" element={<AddEmployee />}></Route>
           </Routes>
         </div>
       </div>

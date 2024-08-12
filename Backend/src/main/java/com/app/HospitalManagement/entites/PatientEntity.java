@@ -36,5 +36,5 @@ public class PatientEntity {
     private boolean isadmit;
     @OneToOne
     @JoinColumn(name="doctorID")
-    private DoctorEntity doctor;
+    private EmployeeEntity doctor;
 }

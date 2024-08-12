@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import EmployeeTable from "../../Components/EmployeeTable";
 
 const Dashboard = () => {
- 
+  const [doctorData, setDoctorData] = useState({
+    id: 1,
+    doj: "2023-08-06",
+    dob: "1990-08-06",
+    salary: 1020032,
+    charges: "OPD1",
+    department: "Neurology",
+    user: {
+      id: 4,
+      createdAt: "2024-08-13T00:13:39.777752",
+      updatedAt: "2024-08-13T00:13:39.777752",
+      name: "honey",
+      email: "honey@gmail.com",
+      password: "$2a$10$uDNl10fV/nUqMWDnXqrB/.bWW14u4dOzzyFET.iyhu3hFdq3DOAyy",
+      phoneNumber: "7599977737",
+      role: "DOCTOR",
+      userImage: null,
+    },
+  });
+
+  const handleUpdate = (id) => {
+    // Handle update logic here
+    console.log("Update Employee with ID:", id);
+  };
+
+  const handleDelete = (id) => {
+    // Handle delete logic here
+    console.log("Delete Employee with ID:", id);
+    // Optionally remove the item from state
+    // setDoctorData(null);
+  };
+
   return (
     <div>
       <div class="grid grid-cols-1 gap-8  px-4 mt-8 md:grid-cols-2 sm:px-8">
@@ -72,7 +104,13 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    
+      <div className="container mx-auto p-4">
+        <EmployeeTable
+          data={doctorData}
+          onUpdate={handleUpdate}
+          onDelete={handleDelete}
+        />
+      </div>
     </div>
   );
 };

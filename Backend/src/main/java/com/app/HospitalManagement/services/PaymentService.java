@@ -9,7 +9,7 @@ import com.app.HospitalManagement.entites.Fees;
 import com.app.HospitalManagement.entites.PaymentEntity;
 
 public interface PaymentService {
-	 PaymentEntity savePayment(PaymentEntity payment);
+	 PaymentEntity savePayment(PaymentDto payment);
 
 	    
 	    Optional<PaymentEntity> findPaymentById(Long id);

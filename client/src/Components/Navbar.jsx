@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const loginStatus = useSelector((state) => state.user.loginStatus);
-
+  console.log(loginStatus);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -29,7 +29,7 @@ const Navbar = () => {
           >
             <span className="sr-only">Open main menu</span>
             <svg
-              className={`w-6 h-6 ${isMenuOpen ? 'hidden' : 'block'}`}
+              className={`w-6 h-6 ${isMenuOpen ? "hidden" : "block"}`}
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ const Navbar = () => {
               />
             </svg>
             <svg
-              className={`w-6 h-6 ${isMenuOpen ? 'block' : 'hidden'}`}
+              className={`w-6 h-6 ${isMenuOpen ? "block" : "hidden"}`}
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -56,27 +56,41 @@ const Navbar = () => {
         </div>
 
         <div
-          className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? 'block' : 'hidden'}`}
+          className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${
+            isMenuOpen ? "block" : "hidden"
+          }`}
           id="mobile-menu"
         >
           <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
             <li>
-              <Link to="/" className="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0">
+              <Link
+                to="/"
+                className="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0"
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/departments" className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0">
+              <Link
+                to="/departments"
+                className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0"
+              >
                 Departments
               </Link>
             </li>
             <li>
-              <Link to="/doctors" className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0">
+              <Link
+                to="/doctors"
+                className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0"
+              >
                 Doctors
               </Link>
             </li>
             <li>
-              <Link to="/about" className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0">
+              <Link
+                to="/about"
+                className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0"
+              >
                 About Us
               </Link>
             </li>
@@ -99,15 +113,26 @@ const Navbar = () => {
                   />
                 </div>
               </button>
-              <ul className={`menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52 absolute right-0 ${profileOpen ? 'block' : 'hidden'}`}>
+              <ul
+                className={`menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52 absolute right-0 ${
+                  profileOpen ? "block" : "hidden"
+                }`}
+              >
                 <li>
-                  <Link to="/profile" className="flex items-center justify-between">
+                  <Link
+                    to="/profile"
+                    className="flex items-center justify-between"
+                  >
                     Profile
                     <span className="badge">New</span>
                   </Link>
                 </li>
-                <li><Link to="/settings">Settings</Link></li>
-                <li><Link to="/logout">Logout</Link></li>
+                <li>
+                  <Link to="/settings">Settings</Link>
+                </li>
+                <li>
+                  <Link to="/logout">Logout</Link>
+                </li>
               </ul>
             </div>
           ) : (
@@ -116,10 +141,13 @@ const Navbar = () => {
                 className="bg-blue-400 hover:bg-blue-500 border outline-none rounded-md py-2 px-4 md:py-3 md:px-6 font-semibold text-white"
                 to="/login"
               >
-                <span className='text-sm md:text-xl font-bold'>Login</span>
+                <span className="text-sm md:text-xl font-bold">Login</span>
               </Link>
-              <Link className="bg-blue-400 hover:bg-blue-500 border outline-none rounded-md py-2 px-4 md:py-3 md:px-6 font-semibold text-white" to="/register">
-                <span className='text-sm md:text-xl font-bold'>Register</span>
+              <Link
+                className="bg-blue-400 hover:bg-blue-500 border outline-none rounded-md py-2 px-4 md:py-3 md:px-6 font-semibold text-white"
+                to="/register"
+              >
+                <span className="text-sm md:text-xl font-bold">Register</span>
               </Link>
             </div>
           )}

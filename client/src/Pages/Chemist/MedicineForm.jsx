@@ -46,7 +46,6 @@ const MedicineForm = () => {
       if (result.status === 200)
         toast.success("Medicine Inserted Successfully");
       setMedicine({
-        ...medicine,
         name: "",
         price: "",
         quantity: "",
@@ -60,64 +59,71 @@ const MedicineForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
         <h2 className="font-semibold text-2xl mb-6 text-center">
-          Add New Medicine
+          ADD MEDICINE INTO STOCK
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={medicine.name}
-              onChange={handleChange}
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
-            />
+          {/* Side-by-side Inputs */}
+          <div className="flex flex-wrap gap-4 mb-4">
+            <div className="flex-1">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={medicine.name}
+                onChange={handleChange}
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Price
+              </label>
+              <input
+                type="number"
+                name="price"
+                value={medicine.price}
+                onChange={handleChange}
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+              />
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Price
-            </label>
-            <input
-              type="number"
-              name="price"
-              value={medicine.price}
-              onChange={handleChange}
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
-            />
+
+          <div className="flex flex-wrap gap-4 mb-4">
+            <div className="flex-1">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Quantity
+              </label>
+              <input
+                type="number"
+                name="quantity"
+                value={medicine.quantity}
+                onChange={handleChange}
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Expiry Date
+              </label>
+              <input
+                type="date"
+                name="expiryDate"
+                value={medicine.expiryDate}
+                onChange={handleChange}
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+              />
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Quantity
-            </label>
-            <input
-              type="number"
-              name="quantity"
-              value={medicine.quantity}
-              onChange={handleChange}
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Expiry Date
-            </label>
-            <input
-              type="date"
-              name="expiryDate"
-              value={medicine.expiryDate}
-              onChange={handleChange}
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
-            />
-          </div>
+
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Manufacturer
@@ -131,6 +137,7 @@ const MedicineForm = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
             />
           </div>
+
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Photo
@@ -142,6 +149,7 @@ const MedicineForm = () => {
               className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
             />
           </div>
+
           <div className="flex items-center justify-between">
             <button
               type="submit"

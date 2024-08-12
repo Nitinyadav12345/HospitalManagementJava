@@ -1,8 +1,9 @@
 import React from "react";
 import SidebarMenu from "../../Components/SidebarMenu";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import ViewStock from "./ViewStock";
 import MedicineForm from "./MedicineForm";
+import Billing from "./Billing";
 
 const SidebarP = () => {
   const menu = [
@@ -16,14 +17,14 @@ const SidebarP = () => {
       <div className="hidden md:flex flex-col w-64 bg-pink-500">
         <div className="flex items-center justify-center h-16 bg-pink-900">
           <div className="flex-1">
-            <a className="btn btn-ghost text-xl">
+            <Link to="/" className="btn btn-ghost text-xl">
               <img
                 className=" w-10"
                 src="../../Resources/logo.png"
                 alt="logo"
               />
               <span className=" font-extrabold text-2xl">HMS</span>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="flex flex-col flex-1 overflow-y-auto">
@@ -93,6 +94,7 @@ const SidebarP = () => {
           <Routes>
             <Route path="" element={<ViewStock />}></Route>
             <Route path="addmed" element={<MedicineForm />}></Route>
+            <Route path="medbill" element={<Billing />}></Route>
           </Routes>
         </div>
       </div>

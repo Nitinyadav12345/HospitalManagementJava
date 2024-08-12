@@ -22,6 +22,8 @@ public class EmployeeEntity  {
     @Column(nullable = false)
     private LocalDate dob;
     private double salary;
+    private String charges;
+    private String department;
     @OneToOne(cascade = CascadeType.ALL , orphanRemoval = true)
     @JoinColumn(name = "userID",unique = true,nullable = false)
     private UserEntity user;

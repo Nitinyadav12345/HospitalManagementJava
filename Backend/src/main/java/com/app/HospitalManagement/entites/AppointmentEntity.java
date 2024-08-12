@@ -18,7 +18,7 @@ public class AppointmentEntity extends BaseEntity {
     private LocalDate appdate;
     @ManyToOne
     @JoinColumn(name = "doctorID")
-    private DoctorEntity doctor;
+    private EmployeeEntity doctor;
     @ManyToOne
     @JoinColumn(name = "patientID")
     private PatientEntity patient;

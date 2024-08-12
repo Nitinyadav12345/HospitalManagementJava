@@ -37,3 +37,13 @@ export async function deleteMedicine({ id }) {
   });
   return result;
 }
+
+export async function insertPayment(paymentData) {
+  const token = sessionStorage.getItem("token");
+  const result = await axios.post(`${config2.url}/api/payments`, paymentData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return result;
+}

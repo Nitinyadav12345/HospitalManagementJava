@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { validateEmail, validatePassword } from "../Validations/validation";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const loginStatus = useSelector((state) => state.user.loginStatus);
   const roleRoutes = {
     DOCTOR: `/doctor`,
     ADMIN: `/admin`,
@@ -46,6 +47,7 @@ const Login = () => {
             navigate(route);
           }
           dispatch(loginAction);
+          console.log(loginStatus);
         } else if ((result.status = "error")) {
           toast.error(result.data + " Login failed");
         } else {
@@ -60,8 +62,6 @@ const Login = () => {
   const handleCancel = () => {
     setEmail("");
     setPassword("");
-    // Optionally, navigate to a different page
-    // navigate('/');
   };
 
   return (

@@ -3,15 +3,13 @@ package com.app.HospitalManagement.services;
 import com.app.HospitalManagement.dto.PatientDto;
 import com.app.HospitalManagement.entites.*;
 import com.app.HospitalManagement.exception.NoRecordFoundException;
-import com.app.HospitalManagement.repositories.DoctorRepositiory;
+import com.app.HospitalManagement.repositories.EmployeeRepositiory;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.app.HospitalManagement.repositories.PatientRepository;
 import com.app.HospitalManagement.repositories.UserRepositiory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -28,7 +26,7 @@ public class PatientServiceImpl implements  PatientService{
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
-    private DoctorRepositiory doctorRepo;
+    private EmployeeRepositiory employeeRepositiory;
 
     @Override
     public String registerPatient(PatientDto patientDto) {
@@ -74,7 +72,7 @@ public class PatientServiceImpl implements  PatientService{
         log.info("inside the function appoint Doctor");
         PatientEntity patient = patientRepo.findById(id)
                 .orElseThrow(()-> new NoRecordFoundException("Patient not found exception"));
-        DoctorEntity doctor = doctorRepo.findById(did)
+        EmployeeEntity doctor = employeeRepositiory.findById(did)
                 .orElseThrow(()-> new NoRecordFoundException("Doctor not found exception"));
         patient.setDoctor(doctor);
         patientRepo.save(patient);

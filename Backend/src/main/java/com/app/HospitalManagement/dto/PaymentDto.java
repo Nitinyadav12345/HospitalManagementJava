@@ -15,6 +15,6 @@ public class PaymentDto {
     private Long id; 
     private double fees;
     private Fees status;
-    private Long patientId;
+    private Long patient;
     private Category category; 
 }

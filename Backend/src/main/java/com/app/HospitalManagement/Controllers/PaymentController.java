@@ -7,6 +7,7 @@ import com.app.HospitalManagement.response.ApiResponseFailure;
 import com.app.HospitalManagement.response.ApiResponseSuccess;
 import com.app.HospitalManagement.services.PaymentService;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,32 +23,16 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @PostMapping
     public ResponseEntity<?> createPayment(@RequestBody PaymentDto paymentDto) {
         log.info("Request to create payment: {}", paymentDto);
-        ApiResponseSuccess<PaymentDto> response = new ApiResponseSuccess<>();
+        ApiResponseSuccess<PaymentEntity> response = new ApiResponseSuccess<>();
         try {
-            // Convert PaymentDto to PaymentEntity
-            PaymentEntity paymentEntity = new PaymentEntity();
-            paymentEntity.setFees(paymentDto.getFees());
-            paymentEntity.setStatus(paymentDto.getStatus());
-            paymentEntity.setCategory(paymentDto.getCategory());
-            // Set PatientEntity if needed
-            // paymentEntity.setPatient(new PatientEntity(paymentDto.getPatientId()));
-
-            // Save the payment
-            PaymentEntity savedPayment = paymentService.savePayment(paymentEntity);
-
-            // Convert saved PaymentEntity back to PaymentDto
-            PaymentDto savedPaymentDto = new PaymentDto();
-            savedPaymentDto.setId(savedPayment.getId());
-            savedPaymentDto.setFees(savedPayment.getFees());
-            savedPaymentDto.setStatus(savedPayment.getStatus());
-            savedPaymentDto.setCategory(savedPayment.getCategory());
-            // Set PatientId if needed
-            // savedPaymentDto.setPatientId(savedPayment.getPatient().getId());
-
-            response.setData(savedPaymentDto);
+            PaymentEntity payment = paymentService.savePayment(paymentDto);
+            response.setData(payment);
         } catch (Exception ex) {
             ApiResponseFailure<String> failureResponse = new ApiResponseFailure<>();
             failureResponse.setData("Error occurred while creating payment");
