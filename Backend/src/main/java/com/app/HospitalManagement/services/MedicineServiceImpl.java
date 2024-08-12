@@ -1,5 +1,7 @@
 package com.app.HospitalManagement.services;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,16 +20,21 @@ public class MedicineServiceImpl implements MedicineService {
 
 	@Autowired
 	private ModelMapper modelMapper;
-	
+	@Autowired
+	private FileStorageService fileStorageService;
+
 	@Autowired
 	private MedicineRepository medicineRepository;
-	
-	@Override
-	public MedicineDto addMedicine(MedicineDto medicineDto) {
-		MedicineEntity medicineEntity=this.modelMapper.map(medicineDto, MedicineEntity.class);
-		MedicineEntity savedMedicineEntity=this.medicineRepository.save(medicineEntity);
-		 
-		return this.modelMapper.map(savedMedicineEntity, MedicineDto.class);
+
+	public MedicineEntity saveMedicine(MedicineDto medicineDTO)  {
+		String photoPath = null;
+		try{
+			photoPath = fileStorageService.saveFile(medicineDTO.getPhoto());
+		}catch (Exception exception){
+			exception.printStackTrace();
+		}
+		MedicineEntity medicine = modelMapper.map(medicineDTO,MedicineEntity.class);
+		return medicineRepository.save(medicine);
 	}
 
 	@Override
@@ -56,14 +63,9 @@ public class MedicineServiceImpl implements MedicineService {
 	}
 
 	@Override
-	public List<MedicineDto> getAllMedicines() {
+	public List<MedicineEntity> getAllMedicines() {
 		List<MedicineEntity> medicines=this.medicineRepository.findAll();
-		 List<MedicineDto> medicineDto = medicines.stream()
-			        .map(medicineEntity -> this.modelMapper.map(medicineEntity, MedicineDto.class))
-			        .collect(Collectors.toList());
-		
-		// TODO Auto-generated method stub
-		return medicineDto;
+		return medicines;
 	}
 
 }

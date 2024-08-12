@@ -5,39 +5,40 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.app.HospitalManagement.entites.MedicineEntity;
+import com.app.HospitalManagement.response.ApiResponseSuccess;
+import com.app.HospitalManagement.services.FileStorageService;
+import org.apache.commons.io.FileUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
 import com.app.HospitalManagement.dto.MedicineDto;
 import com.app.HospitalManagement.services.MedicineService;
-
-
-
+import org.springframework.core.io.Resource;
+import org.yaml.snakeyaml.util.EnumUtils;
 
 
 @RestController
 @RequestMapping("/chemist/medicine")
+@CrossOrigin
 public class MedicineController {
 	
 	@Autowired
 	private MedicineService medicineService;
-	
+	@Autowired
+	private FileStorageService fileStorageService;
+	@Autowired
+	private ModelMapper modelMapper;
 	//post add medicine
-		@PostMapping("/")
-		public ResponseEntity<MedicineDto> addMedicine(@Valid @RequestBody MedicineDto medicineDto)
-		{
-			 MedicineDto createMedicineDto=this.medicineService.addMedicine(medicineDto);
-			 
-			 return new ResponseEntity<>(createMedicineDto, HttpStatus.CREATED);
+		@PostMapping("/insert")
+		public ResponseEntity<?> insertMedicine(@ModelAttribute MedicineDto medicineDTO)  {
+			MedicineEntity savedMedicine = medicineService.saveMedicine(medicineDTO);
+			ApiResponseSuccess<MedicineEntity> responseSuccess = new ApiResponseSuccess<>();
+			responseSuccess.setData(savedMedicine);
+			return ResponseEntity.ok(responseSuccess);
 		}
 		//edit quantity	
 		@PutMapping("/{id}")
@@ -45,7 +46,6 @@ public class MedicineController {
 		{
 			MedicineDto updatedQuantity=this.medicineService.updateQuantity(medicineDto, id);
 			return ResponseEntity.ok(updatedQuantity);
-			
 		}
 		
 		//delete  medicine
@@ -57,10 +57,13 @@ public class MedicineController {
 		}
 		
 		//get all medicine
-		@GetMapping("/")
-		public ResponseEntity<List<MedicineDto>> getAllMedicines()
+		@GetMapping()
+		public ResponseEntity<?> getAllMedicines()
 		{
-			return ResponseEntity.ok(this.medicineService.getAllMedicines());
+			List<MedicineEntity> list  = medicineService.getAllMedicines();
+			ApiResponseSuccess<List<MedicineEntity>> responseSuccess = new ApiResponseSuccess<>();
+			responseSuccess.setData(list);
+			return ResponseEntity.ok(responseSuccess);
 		}
 		
 		//get medicine by id
@@ -69,4 +72,19 @@ public class MedicineController {
 		{
 			return ResponseEntity.ok(this.medicineService.getMedicine(id));
 		}
+
+	@GetMapping("/{id}/photo")
+	public ResponseEntity<Resource> getMedicinePhoto(@PathVariable Long id) {
+		MedicineDto medicine = medicineService.getMedicine(id);
+		MedicineEntity med = modelMapper.map(medicine,MedicineEntity.class);
+		Resource file = null;
+		try{
+			file = fileStorageService.loadFile(med.getPhoto());
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+		return ResponseEntity.ok()
+				.contentType(MediaType.IMAGE_JPEG)
+				.body(file);
+	}
 }

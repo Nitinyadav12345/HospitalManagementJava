@@ -10,7 +10,6 @@ import { jwtDecode } from "jwt-decode";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const roleRoutes = {
@@ -25,46 +24,42 @@ const Login = () => {
   };
   const onLogin = async (event) => {
     event.preventDefault();
-    
+
     if (!validateEmail(email)) {
-      toast.warning('Enter a valid email');
+      toast.warning("Enter a valid email");
     } else if (password.length == 0) {
       toast.warning("Enter a password ");
-    } else if (role === '') {
-      toast.warning("Choose a role first");
     } else {
       try {
-        const result = await login(email, password, role);
-        console.log(result)
-        if (result.status === 'Success') {
-          toast.success('Login successful!');
+        const result = await login(email, password);
+        console.log(result);
+        if (result.status === "Success") {
+          toast.success("Login successful!");
           const token = result["token"];
-          console.log(token)
+          console.log(token);
           const decodedToken = jwtDecode(token);
           console.log(decodedToken);
           sessionStorage.token = token;
-          // Navigate based on role or to a specific page     
+          // Navigate based on role or to a specific page
           const route = roleRoutes[decodedToken.authorities];
-          if(route){
+          if (route) {
             navigate(route);
           }
           dispatch(loginAction);
-        }else if(result.status = "error"){
+        } else if ((result.status = "error")) {
           toast.error(result.data + " Login failed");
-        }
-         else {
-          toast.error('Login failed');
+        } else {
+          toast.error("Login failed");
         }
       } catch (error) {
-        toast.error('An error occurred during login');
+        toast.error("An error occurred during login");
       }
     }
   };
 
   const handleCancel = () => {
-    setEmail('');
-    setPassword('');
-    setRole('');
+    setEmail("");
+    setPassword("");
     // Optionally, navigate to a different page
     // navigate('/');
   };
@@ -89,19 +84,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <select
-              id="role"
-              className="border bg-gray-100 border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 mb-3"
-              value={role}
-              onChange={handleChange}
-            >
-              <option value="">Choose Role</option>
-              <option value="DOCTOR">Doctor</option>
-              <option value="PATIENT">Patient</option>
-              <option value="CHEMIST">Chemist</option>
-              <option value="ADMIN">Admin</option>
-              <option value="RECEPTIONIST">Receptionist</option>
-            </select>
+
             <div className="flex mb-4">
               <button
                 type="submit"
@@ -126,7 +109,11 @@ const Login = () => {
           </form>
         </div>
         <div className="bg-gradient-to-r from-[#E4F9F5] to-[#5038ED] rounded-sm flex items-center justify-center">
-          <img src="../../Resources/doctor.png" className="rounded-3xl" alt="Login Illustration" />
+          <img
+            src="../../Resources/doctor.png"
+            className="rounded-3xl"
+            alt="Login Illustration"
+          />
         </div>
       </div>
     </div>

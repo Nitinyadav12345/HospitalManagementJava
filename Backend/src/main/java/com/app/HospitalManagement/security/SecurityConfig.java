@@ -50,7 +50,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 //TO PERMIT THE API FOR ROLE BASED
                 .antMatchers("/appointment/updatestatus").hasAuthority("DOCTOR")
-                .antMatchers("/medicene/add").hasAuthority("CHEMIST")
+                .antMatchers("/chemist/medicene/insert").hasAuthority("CHEMIST")
                 .antMatchers("/patient/update/**").hasAuthority("PATIENT")
                 .antMatchers("/employee/register" , "/employee/update","/employee/delete/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()

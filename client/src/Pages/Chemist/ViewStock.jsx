@@ -1,111 +1,90 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { getAllMedicine } from "../../service/chemist";
+import { toast } from "react-toastify";
+import MedicineCard from "../../Components/MedicineCard";
 
 const ViewStock = () => {
+  const [medicine, setMedicine] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMedicine = async () => {
+      try {
+        const res = await getAllMedicine();
+        setMedicine(res.data.data);
+        console.log(res.data.data);
+      } catch (error) {
+        console.log(error);
+        toast.error("failed to load the medicines data");
+      }
+    };
+
+    fetchMedicine();
+  }, []);
+
   return (
-    <div>
-        <center><span className=' text-2xl font-bold'>MEDICAL STOCK</span></center>
-      <div className="overflow-x-auto mt-5">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th className='text-lg font-semibold'>Name</th>
-              <th className='text-lg font-semibold'>Price</th>
-              <th className='text-lg font-semibold'>Quantity</th>
-              <th className='text-lg font-semibold'>Expiry Date</th>
-              <th className='text-lg font-semibold'>Details</th>
-              <th className='text-lg font-semibold'>Image</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            <tr>
-              <td>Supradyn Daily Tablets</td>
-              <td>
-                500
-                <br />
-              </td>
-              <td>100</td>
-              <td>22/05/2026</td>
-              <td>New Supradyn Daily Tablets contain 12 vitamins</td>
-
-              <th>
-                <div className="mask mask-squircle h-12 w-12">
-                  <img
-                    src="https://www.netmeds.com/images/product-v1/150x150/963415/supradyn_daily_tablet_15s_0_1.jpg"
-                    alt="Avatar Tailwind CSS Component"
-                  />
-                </div>
-              </th>
-            </tr>
-            {/* row 2 */}
-            <tr>
-              <td>Pudin Hara</td>
-              <td>
-                50
-                <br />
-              </td>
-              <td>100</td>
-              <td>25/07/2025</td>
-              <td> Provide quick relief from stomach ailments</td>
-
-              <th>
-                <div className="mask mask-squircle h-12 w-12">
-                  <img
-                    src="https://www.netmeds.com/images/product-v1/150x150/15917/dabur_pudin_hara_pearls_capsule_10_s_0.jpg"
-                    alt="Avatar Tailwind CSS Component"
-                  />
-                </div>
-              </th>
-            </tr>
-            {/* row 3 */}
-            <tr>
-              <td>Saridon Advance Tablets</td>
-              <td>
-                100
-                <br />
-              </td>
-              <td>200</td>
-              <td>22/05/2026</td>
-              <td> perfect solution for people suffering from severe headaches</td>
-
-              <th>
-                <div className="mask mask-squircle h-12 w-12">
-                  <img
-                    src="https://www.netmeds.com/images/product-v1/600x600/930731/saridon_advance_tablets_for_5_in_1_pain_relief_10s_155118_0_3.jpg"
-                    alt="Avatar Tailwind CSS Component"
-                  />
-                </div>
-              </th>
-            </tr>
-            {/* row 4 */}
-            <tr>
-              <td>Vicks Vaporub</td>
-              <td>
-                70
-                <br />
-              </td>
-              <td>100</td>
-              <td>22/06/2026</td>
-              <td>Maximum relief from nasal congestion, cough, and cold symptoms</td>
-
-              <td>
-                <div className="mask mask-squircle h-12 w-12">
-                  <img
-                    src="https://www.netmeds.com/images/product-v1/600x600/14021/vicks_vaporub_50_ml_32625_0_1.jpg"
-                    alt="Avatar Tailwind CSS Component"
-                  />
-                </div>
-              </td>
-            </tr>
-          </tbody>
-          {/* foot */}
-        
-        </table>
+    <div className="container mx-auto p-4">
+      <center>
+        <span className="text-2xl font-bold">MEDICAL STOCK</span>
+      </center>
+      {/* //----------------------------------------------- */}
+      <form class="max-w-md mx-auto mt-5">
+        <label
+          for="default-search"
+          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+        >
+          Search
+        </label>
+        <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg
+              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+          <input
+            type="search"
+            id="default-search"
+            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Search Mockups, Logos..."
+            required
+          />
+          <button
+            type="submit"
+            class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Search
+          </button>
+        </div>
+      </form>
+      {/* //----------------------------------------------- */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mt-4">
+        {medicine.map((med) => (
+          <MedicineCard
+            key={med.id}
+            id={med.id}
+            name={med.name}
+            price={med.price}
+            quantity={med.quantity}
+            expiryDate={med.expiryDate}
+            manufacturer={med.manufacturer}
+            imagePath={med.photo}
+          />
+        ))}
       </div>
     </div>
   );
-}
+};
 
-export default ViewStock
+export default ViewStock;

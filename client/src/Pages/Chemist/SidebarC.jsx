@@ -2,6 +2,8 @@ import React from "react";
 import SidebarMenu from "../../Components/SidebarMenu";
 import { Route, Routes } from "react-router-dom";
 import ViewStock from "./ViewStock";
+import MedicineForm from "./MedicineForm";
+
 
 const SidebarP = () => {
 
@@ -89,6 +91,7 @@ const SidebarP = () => {
           {/* here render the pages  */}
           <Routes>
             <Route path="" element={<ViewStock/>}></Route>
+            <Route path="addmed" element={<MedicineForm/>} ></Route>
           </Routes>
         </div>
       </div>

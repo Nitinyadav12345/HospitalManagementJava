@@ -24,10 +24,9 @@ public class MedicineEntity {
     private double price;
     @Column(nullable = false)
     private int quantity;
-    @Lob
-    private Byte [] photo;
+    private String photo;
     @NotNull
     @Column(nullable = false)
-    private LocalDate expiarydate;
-    private String details;
+    private LocalDate expiryDate;
+    private String manufacturer;
 }
