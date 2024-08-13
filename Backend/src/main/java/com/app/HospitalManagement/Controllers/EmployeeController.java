@@ -3,6 +3,7 @@ package com.app.HospitalManagement.Controllers;
 import com.app.HospitalManagement.dto.EmployeeDto;
 import com.app.HospitalManagement.dto.EmployeeUpdate;
 import com.app.HospitalManagement.entites.EmployeeEntity;
+import com.app.HospitalManagement.repositories.EmployeeRepositiory;
 import com.app.HospitalManagement.response.ApiResponseFailure;
 import com.app.HospitalManagement.response.ApiResponseSuccess;
 import com.app.HospitalManagement.services.EmployeeService;
@@ -22,6 +23,9 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private EmployeeRepositiory employeeRepositiory;
+
 
     @PostMapping("/register")
     public ResponseEntity<?> registerEmployee(@RequestBody EmployeeDto employeeDto)  {
@@ -74,5 +78,12 @@ public class EmployeeController {
             ex.printStackTrace();
         }
         return ResponseEntity.ok(response);
+    }
+    @GetMapping("/{id}")
+    public  ResponseEntity<?> getEmpById(@PathVariable Long id ){
+        ApiResponseSuccess<EmployeeEntity> responseSuccess = new ApiResponseSuccess<>();
+        EmployeeEntity emp = employeeRepositiory.findById(id).orElseThrow();
+        responseSuccess.setData(emp);
+        return ResponseEntity.ok(responseSuccess);
     }
 }

@@ -1,10 +1,43 @@
-import React from "react";
+import React ,{ useEffect, useState }  from "react";
 import SidebarMenu from "../../Components/SidebarMenu";
+import axios from "axios";
+import { config2 } from "../../config";
+import { useNavigate } from "react-router-dom";
 
 const SidebarP = () => {
+  const menu = [
+    "View Patient",
+    "View Appointments",
+    "Patient Diagnosis",
+    "Add Prescription",
+  ];
+  const [imageUrl, setImageUrl] = useState("");
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const token = sessionStorage.getItem("token");
+        const response = await axios.get(`${config2.url}/user/profileImage`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          responseType: "arraybuffer",
+        });
+        const imageBlob = new Blob([response.data], { type: "image/jpeg" }); // Adjust type as necessary
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        setImageUrl(imageObjectURL);
+      } catch (error) {
+        console.error("Error fetching the image:", error);
+      }
+    };
 
-    const menu = ["View Patient" ,"View Appointments" ,"Patient Diagnosis" , "Add Prescription"];
+    fetchImage();
+  }, []);
 
+  const navigate = useNavigate();
+  const logout = ()=>{
+    sessionStorage.clear();
+    navigate("/")
+  }
   return (
     <div class="flex h-screen bg-pink-100">
       <div class="hidden md:flex flex-col w-64 bg-pink-500">
@@ -22,15 +55,11 @@ const SidebarP = () => {
         </div>
         <div class="flex flex-col flex-1 overflow-y-auto">
           <nav class="flex-1 px-2 py-4 bg-pink-800">
-            
-           {
-            menu.map((name)=>{
-                return <SidebarMenu name={name}/>
-            })
-           }
+            {menu.map((name) => {
+              return <SidebarMenu name={name} />;
+            })}
           </nav>
         </div>
-        
       </div>
 
       <div class="flex flex-col flex-1 overflow-y-auto">
@@ -52,7 +81,6 @@ const SidebarP = () => {
                 />
               </svg>
             </button>
-           
           </div>
           <div class="flex items-center pr-4 md:items-end">
             {/* this is profile part */}
@@ -66,7 +94,7 @@ const SidebarP = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Avatar"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    src={imageUrl}
                   />
                 </div>
               </div>
@@ -77,15 +105,17 @@ const SidebarP = () => {
                     <span className="badge">New</span>
                   </a>
                 </li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <button onClick={logout}>Logout</button>
+                </li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="p-4">
-          {/* here render the pages  */}
-        </div>
+        <div class="p-4">{/* here render the pages  */}</div>
       </div>
     </div>
   );

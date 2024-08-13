@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { config2 } from "../config";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,6 +15,29 @@ const Navbar = () => {
   const toggleProfile = () => {
     setProfileOpen(!profileOpen);
   };
+
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const token = sessionStorage.getItem("token");
+        const response = await axios.get(`${config2.url}/user/profileImage`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          responseType: "arraybuffer",
+        });
+        const imageBlob = new Blob([response.data], { type: "image/jpeg" }); // Adjust type as necessary
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        setImageUrl(imageObjectURL);
+      } catch (error) {
+        console.error("Error fetching the image:", error);
+      }
+    };
+
+    fetchImage();
+  }, []);
 
   return (
     <nav className="py-2.5 container">
@@ -108,7 +132,7 @@ const Navbar = () => {
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden">
                   <img
                     alt="Avatar"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    src={imageUrl}
                     className="w-full h-full object-cover"
                   />
                 </div>

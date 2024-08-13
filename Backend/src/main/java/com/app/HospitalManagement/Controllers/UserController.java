@@ -10,6 +10,9 @@ import com.app.HospitalManagement.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,10 +57,15 @@ public class UserController {
         return ResponseEntity.ok(responseToken);
     }
     @GetMapping("/profileImage")
-    public byte[] getUserImage(){
-        log.info("inside the getuserimage method ");
-        return userService.getUserImage();
+    public ResponseEntity<byte[]> getUserImage() {
+        log.info("inside the getuserimage method");
+        byte[] image = userService.getUserImage();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
+
+
     @PostMapping("/profileImage")
     public ResponseEntity updateUserImage(@ModelAttribute RegisterDto user){
         ApiResponseSuccess<String> response = new ApiResponseSuccess<>();

@@ -1,6 +1,30 @@
 import React from "react";
+import { toast } from "react-toastify";
 
-const EmployeeTable = ({ data, onUpdate, onDelete }) => {
+const EmployeeTable = ({
+  data,
+  onDelete,
+  itemsPerPage,
+  totalItems,
+  paginate,
+  currentPage,
+}) => {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  const handleDelete = async (id) => {
+    try {
+      await onDelete({ id });
+      window.location.reload();
+      toast.success("Emp deleted successfully");
+    } catch (error) {
+      toast.error("Failed to delete the Emp:", error);
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="overflow-x-auto">
@@ -21,34 +45,49 @@ const EmployeeTable = ({ data, onUpdate, onDelete }) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="px-4 py-2 border">{data.id}</td>
-              <td className="px-4 py-2 border">{data.doj}</td>
-              <td className="px-4 py-2 border">{data.dob}</td>
-              <td className="px-4 py-2 border">{data.salary}</td>
-              <td className="px-4 py-2 border">{data.charges}</td>
-              <td className="px-4 py-2 border">{data.department}</td>
-              <td className="px-4 py-2 border">{data.user.name}</td>
-              <td className="px-4 py-2 border">{data.user.email}</td>
-              <td className="px-4 py-2 border">{data.user.phoneNumber}</td>
-              <td className="px-4 py-2 border">{data.user.role}</td>
-              <td className="px-4 py-2 border">
-                <button
-                  className="bg-blue-500 text-white px-3 py-1 rounded-xl mr-2 my-2"
-                  onClick={() => onUpdate(data.id)}
-                >
-                  Update
-                </button>
-                <button
-                  className="bg-red-500 text-white px-3 py-1 rounded-xl"
-                  onClick={() => onDelete(data.id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
+            {data.map((item) => (
+              <tr key={item.id}>
+                <td className="px-4 py-2 border">{item.id}</td>
+                <td className="px-4 py-2 border">{item.doj}</td>
+                <td className="px-4 py-2 border">{item.dob}</td>
+                <td className="px-4 py-2 border">{item.salary}</td>
+                <td className="px-4 py-2 border">{item.charges}</td>
+                <td className="px-4 py-2 border">{item.department}</td>
+                <td className="px-4 py-2 border">{item.user?.name}</td>
+                <td className="px-4 py-2 border">{item.user?.email}</td>
+                <td className="px-4 py-2 border">{item.user?.phoneNumber}</td>
+                <td className="px-4 py-2 border">{item.user?.role}</td>
+                <td className="px-4 py-2 border">
+                  <button
+                    className="bg-red-500 text-white px-3 py-1 rounded-xl"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
+      </div>
+      <div className="flex justify-center mt-4">
+        <nav>
+          <ul className="flex list-style-none">
+            {pageNumbers.map((number) => (
+              <li
+                key={number}
+                className={`mx-1 ${currentPage === number ? "font-bold" : ""}`}
+              >
+                <button
+                  onClick={() => paginate(number)}
+                  className="px-4 py-2 border rounded-md"
+                >
+                  {number}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </div>
   );

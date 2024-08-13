@@ -1,15 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SidebarMenu from "../../Components/SidebarMenu";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import AddEmployee from "./AddEmployee";
-
+import axios from "axios";
+import { config2 } from "../../config";
 const SidebarP = () => {
   const menu = [
     { name: "Dashboard", path: "" },
     { name: "Add Employee", path: "addemp" },
     { name: "Bills", path: "bills" },
   ];
+  
+  const [imageUrl, setImageUrl] = useState("");
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const token = sessionStorage.getItem("token");
+        const response = await axios.get(`${config2.url}/user/profileImage`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          responseType: "arraybuffer",
+        });
+        const imageBlob = new Blob([response.data], { type: "image/jpeg" }); // Adjust type as necessary
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        setImageUrl(imageObjectURL);
+      } catch (error) {
+        console.error("Error fetching the image:", error);
+      }
+    };
+
+    fetchImage();
+  }, []);
+  const navigate = useNavigate();
+  const logout = ()=>{
+    sessionStorage.clear();
+    navigate("/")
+  }
 
   return (
     <div class="flex h-screen bg-pink-100">
@@ -65,10 +93,7 @@ const SidebarP = () => {
                 // Toggle profile on avatar click
               >
                 <div className="w-10 rounded-full">
-                  <img
-                    alt="Avatar"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                  />
+                  <img alt="Avatar" src={imageUrl} />
                 </div>
               </div>
               <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -82,7 +107,7 @@ const SidebarP = () => {
                   <a>Settings</a>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <button onClick={logout}>Logout</button>
                 </li>
               </ul>
             </div>

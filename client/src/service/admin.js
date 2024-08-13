@@ -37,3 +37,31 @@ export async function employeeRegistration({
   });
   return result;
 }
+
+export async function employeelist() {
+  const token = sessionStorage.getItem("token");
+  const result = await axios.get(`${config2.url}/employee/employees`);
+  return result;
+}
+
+export async function deleteEmp({ id }) {
+  const token = sessionStorage.getItem("token");
+  const result = await axios.get(`${config2.url}/employee/delete/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return result;
+}
+
+export async function revenueGenrator() {
+  const token = sessionStorage.getItem("token");
+  const result = await axios.get(`${config2.url}/api/payments`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const arr = result.data.data;
+  const totalFees = arr.reduce((sum, bill) => sum + bill.fees, 0);
+  return totalFees;
+}

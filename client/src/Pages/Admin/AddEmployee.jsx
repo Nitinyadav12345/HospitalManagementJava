@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   validateEmail,
   validatePassword,
@@ -7,9 +7,12 @@ import {
 import { toast } from "react-toastify";
 import { employeeRegistration, userRegistration } from "../../service/admin";
 import axios from "axios";
+import { config2 } from "../../config";
+import { useLocation } from "react-router-dom";
 
 function AddEmployee() {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
+    id: "",
     name: "",
     email: "",
     password: "",
@@ -20,8 +23,10 @@ function AddEmployee() {
     salary: "",
     charges: "",
     department: "",
-  });
-
+  };
+  const { state } = useLocation();
+  const [formData, setFormData] = useState(initialFormData);
+  //setFormData({ ...formData, name: state.name });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -29,6 +34,15 @@ function AddEmployee() {
       [name]: value,
     });
   };
+  useEffect(() => {
+    if (state && state.employeeData) {
+      setFormData({
+        ...formData,
+        ...state.employeeData,
+        password: "",
+      });
+    }
+  }, [state]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,13 +92,22 @@ function AddEmployee() {
           console.log(res);
           if (res.data.status === "Success") {
             toast.success(res.data.data);
+            handleClear();
+          } else {
+            toast.error(res.data.data);
           }
+        } else {
+          toast.error(result.data.data);
         }
       } catch (error) {
         console.error("Registration error:", error);
         toast.error("Registration failed");
       }
     }
+  };
+
+  const handleClear = () => {
+    setFormData(initialFormData);
   };
 
   return (
