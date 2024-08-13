@@ -6,7 +6,7 @@ import Hero from "../Components/Hero";
 
 const Home = () => {
   const images = [
-    {image:"https://png.pngtree.com/png-clipart/20240701/original/pngtree-indian-doctor-woman-smiling-at-camera-png-image_15456626.png",name:"Alice Smith",specialist:"Neurologist"},
+    {image:"https://png.pngtree.com/png-clipart/20240701/original/pngtree-indian-doctor-woman-smiling-at-camera-png-image_15456626.png",name:"Alice Spector",specialist:"Neurologist"},
     {image:"https://png.pngtree.com/png-clipart/20240701/original/pngtree-indian-doctor-woman-smiling-at-camera-png-image_15456626.png",name:"Grace Lee",specialist:"Cardiologist"},
     {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Jack Anderson",specialist:"Dermatologist"},
     {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Katherine Clark",specialist:"Pediatrician"},
