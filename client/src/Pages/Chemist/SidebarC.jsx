@@ -8,7 +8,7 @@ import Billing from "./Billing";
 const SidebarP = () => {
   const menu = [
     { name: "View Stock", path: "" },
-    { name: "Add Mediciene", path: "addmed" },
+    { name: "Add Medicine", path: "addmed" },
     { name: "Medicine Bill", path: "medbill" },
   ];
 

@@ -10,13 +10,13 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "Medicienes")
+@Table(name = "Medicines")
 @AllArgsConstructor
 @NoArgsConstructor
 public class MedicineEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="medicieneID")
+    @Column(name ="medicineID")
     private Long id;
     @Column(nullable = false , unique = true)
     private String name;
