@@ -6,16 +6,16 @@ import Hero from "../Components/Hero";
 
 const Home = () => {
   const images = [
-    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Nitin Yadav",specialist:"NeuroSurgeon"},
-    {image:"https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=400",name:"Nitin Yadav",specialist:"NeuroSurgeon"},
-    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Nitin Yadav",specialist:"NeuroSurgeon"},
-    {image:"https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=400",name:"Nitin Yadav",specialist:"NeuroSurgeon"},
-    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Nitin Yadav",specialist:"NeuroSurgeon"},
-    {image:"https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=400",name:"Nitin Yadav",specialist:"NeuroSurgeon"},
-    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Nitin Yadav",specialist:"NeuroSurgeon"},
-    {image:"https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=400",name:"Nitin Yadav",specialist:"NeuroSurgeon"},
-    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Nitin Yadav",specialist:"NeuroSurgeon"},
-    {image:"https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=400",name:"Nitin Yadav",specialist:"NeuroSurgeon"}
+    {image:"https://png.pngtree.com/png-clipart/20240701/original/pngtree-indian-doctor-woman-smiling-at-camera-png-image_15456626.png",name:"Alice Smith",specialist:"Neurologist"},
+    {image:"https://png.pngtree.com/png-clipart/20240701/original/pngtree-indian-doctor-woman-smiling-at-camera-png-image_15456626.png",name:"Grace Lee",specialist:"Cardiologist"},
+    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Jack Anderson",specialist:"Dermatologist"},
+    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Katherine Clark",specialist:"Pediatrician"},
+    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Liam Lewis",specialist:"Psychiatrist"},
+    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Noah King",specialist:"Radiologist"},
+    {image:"https://png.pngtree.com/png-clipart/20240701/original/pngtree-indian-doctor-woman-smiling-at-camera-png-image_15456626.png",name:"Rachel Hall",specialist:"Sports Medicine Specialist"},
+    {image:"https://png.pngtree.com/png-clipart/20240701/original/pngtree-indian-doctor-woman-smiling-at-camera-png-image_15456626.png",name:"Sia Nelson",specialist:"General Surgeon"},
+    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Wendy Adams",specialist:"Family Physician"},
+    {image:"https://png.pngtree.com/png-clipart/20231001/original/pngtree-male-physician-doctor-png-image_13218894.png",name:"Aaron Young",specialist:"Plastic Surgeon"}
   ];
 
   return (
