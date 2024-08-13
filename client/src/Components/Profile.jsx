@@ -11,11 +11,12 @@ const Profile = ({ image, name, desc }) => {
         </div>
       </figure>
       <div className="card-body text-center p-4">
-        <h2 className="card-title text-lg sm:text-xl md:text-2xl lg:text-3xl">
+        <h2 className="card-title text-lg sm:text-l md:text-2xl lg:text-3xl">
           {name}
-          <div className="badge badge-secondary text-xs sm:text-sm md:text-base">
-            {desc}
-          </div>
+          <div className="text-sm:text-xs md:text-base px-2 py-1 rounded">
+  {desc}
+</div>
+
         </h2>
       </div>
     </div>
