@@ -39,7 +39,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterDto user) {
         log.info("inside the registerUsermethod user Controller Class {}",user);
-        ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
+        ApiResponseSuccess<UserEntity> response = new ApiResponseSuccess<>();
         response.setData(userService.registerUser(user));
         return ResponseEntity.ok(response);
     }

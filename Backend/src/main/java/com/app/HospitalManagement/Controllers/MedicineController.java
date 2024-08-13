@@ -78,7 +78,7 @@ public class MedicineController {
 		{
 			return ResponseEntity.ok(this.medicineService.getMedicine(id));
 		}
-	// THIS API IS NOT WORKING I WILL WORK ON IT LATER
+
 	@GetMapping("/photo/{id}")
 	public ResponseEntity<Resource> getMedicinePhoto(@PathVariable Long id) {
 

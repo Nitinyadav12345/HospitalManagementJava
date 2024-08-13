@@ -94,6 +94,14 @@ const Navbar = () => {
                 About Us
               </Link>
             </li>
+            <li>
+              <Link
+                to="/contact"
+                className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0"
+              >
+                Contact Us
+              </Link>
+            </li>
           </ul>
         </div>
 

@@ -66,7 +66,6 @@ import javax.transaction.Transactional;
 			        log.info("Found {} payments for patient ID: {}", payments.size(), patientId);
 			        return payments;
 			    }
-		
 
 		@Override
 		public List<PaymentEntity> findPaymentsByStatus(Fees status) {
@@ -84,8 +83,4 @@ import javax.transaction.Transactional;
 			
 		}
 
-		
-	    
-
-		
 }

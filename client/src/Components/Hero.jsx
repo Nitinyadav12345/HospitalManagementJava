@@ -6,8 +6,8 @@ const Hero = () => {
       <div className="carousel w-full h-[300px] md:h-[400px]">
         <div id="item1" className="carousel-item w-full">
           <img
-            src="https://images.pexels.com/photos/3683077/pexels-photo-3683077.jpeg?auto=compress&cs=tinysrgb&w=600"
-            className="w-full h-full object-cover"
+            src="https://cdn.pixabay.com/photo/2015/05/15/05/31/night-view-767852_960_720.jpg"
+            className="w-full h-half object-cover"
             alt="Carousel Item 1"
           />
         </div>
@@ -20,14 +20,14 @@ const Hero = () => {
         </div>
         <div id="item3" className="carousel-item w-full">
           <img
-            src="https://images.pexels.com/photos/668300/pexels-photo-668300.jpeg?auto=compress&cs=tinysrgb&w=600"
+            src="https://cdn.pixabay.com/photo/2020/04/16/15/39/medical-5051148_960_720.jpg"
             className="w-full h-full object-cover"
             alt="Carousel Item 3"
           />
         </div>
         <div id="item4" className="carousel-item w-full">
           <img
-            src="https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&cs=tinysrgb&w=600"
+            src="https://cdn.pixabay.com/photo/2019/04/03/03/06/medical-equipment-4099429_960_720.jpg"
             className="w-full h-full object-cover"
             alt="Carousel Item 4"
           />
