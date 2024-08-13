@@ -94,22 +94,7 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li>
-              <Link
-                to="/departments"
-                className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0"
-              >
-                Departments
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/doctors"
-                className="block py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0"
-              >
-                Doctors
-              </Link>
-            </li>
+
             <li>
               <Link
                 to="/about"
