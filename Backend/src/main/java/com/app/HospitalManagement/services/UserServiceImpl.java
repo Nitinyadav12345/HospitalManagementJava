@@ -27,15 +27,14 @@ public class UserServiceImpl implements UserService{
     private UserRepositiory userRepositiory;
 
     @Override
-    public String registerUser(RegisterDto user) {
+    public UserEntity registerUser(RegisterDto user) {
         log.info("inside user register user {}",user);
         user.setPassword(encoder.encode(user.getPassword()));
         UserEntity user1 = mapper.map(user,UserEntity.class);
         if(userRepositiory.existsByEmail(user.getEmail())){
             throw new UniqueConstraintViolationException("EMAIL_EXISTS");
         }
-        userRepositiory.save(user1);
-        return "User Added Successfully";
+        return userRepositiory.save(user1);
     }
 
     @Override
