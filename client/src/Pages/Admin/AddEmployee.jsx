@@ -90,7 +90,7 @@ function AddEmployee() {
         if (result.data.status === "Success") {
           const userid = result.data.data.id;
           console.log(userid);
-          const res1 = await uploadUserImage({ file, userid });
+          const res1 = await uploadUserImage({ image: file, userid });
           console.log(res1);
           if (res1.data.status === "Success") {
             toast.success(res1.data.data);
@@ -287,7 +287,7 @@ function AddEmployee() {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-bold hover:bg-blue-600 transition duration-300"
+          className="w-full bg-green-500 text-white py-3 px-6 rounded-lg font-bold hover:bg-green-600 transition duration-300"
         >
           Submit
         </button>

@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class PatientDto {
     private String bloodgroup;
     private LocalDate dob;
+    private int bedno;
     private String prescription;
     private String disease;
     private Long userId;

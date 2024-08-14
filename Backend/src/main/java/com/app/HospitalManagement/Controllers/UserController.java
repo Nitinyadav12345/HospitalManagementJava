@@ -66,6 +66,14 @@ public class UserController {
         return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
 
+    @GetMapping("/profileImage/{id}")
+    public ResponseEntity<byte[]> getUserImageall(@PathVariable  Long id) {
+        log.info("inside the getUserImageall method");
+        byte[] image = userService.getUserImageById(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+    }
 
     @PostMapping("/profileImage/{id}")
     public ResponseEntity updateUserImage(@ModelAttribute RegisterDto user ,@PathVariable Long id ){

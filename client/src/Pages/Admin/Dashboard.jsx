@@ -18,8 +18,8 @@ const Dashboard = () => {
         setRevenue(rev);
         setLoading(false);
       } catch (error) {
-        toast.error("Error in fetching the doctor data");
-        console.error("Error fetching doctor data:", error);
+        toast.error("Error in fetching the Employee data");
+        console.error("Error fetching Employee data:", error);
         setLoading(false);
       }
     };

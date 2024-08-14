@@ -37,24 +37,36 @@ public class UserServiceImpl implements UserService{
         return userRepositiory.save(user1);
     }
 
-    @Override
+    //i have to work on this getting null pointer here
     public String updateImageUser(RegisterDto user , Long id) {
-        UserEntity user1 = userRepositiory.findById(id).orElseThrow();
+        UserEntity user1 = userRepositiory.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        if (user1 == null) {
+            throw new RuntimeException("UserEntity is null");
+        }
+        if (user.getImage() == null) {
+            throw new RuntimeException("Image is null");
+        }
         try {
             user1.setUserImage(user.getImage().getBytes());
+            userRepositiory.save(user1); // Don't forget to save the updated entity
         }
         catch (Exception err){
             err.printStackTrace();
         }
         return "User Image Inserted Successfully";
-     }
-
+    }
     @Override
     public byte[] getUserImage() {
         String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         UserEntity user1 = userRepositiory.findByEmail(email).orElseThrow();
         log.info("getImage");
         return user1.getUserImage();
+    }
+
+    @Override
+    public byte[] getUserImageById(Long id) {
+        UserEntity user = userRepositiory.findById(id).orElseThrow();
+        return user.getUserImage();
     }
 
 }

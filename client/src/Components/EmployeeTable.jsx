@@ -52,6 +52,7 @@ const EmployeeTable = ({
           <thead>
             <tr>
               <th className="px-4 py-2 border">ID</th>
+              <th className="px-4 py-2 border">Profile Photo</th>
               <th className="px-4 py-2 border">Date of Joining</th>
               <th className="px-4 py-2 border">Date of Birth</th>
               <th className="px-4 py-2 border">Salary</th>
@@ -68,6 +69,16 @@ const EmployeeTable = ({
             {filteredData.map((item) => (
               <tr key={item.id}>
                 <td className="px-4 py-2 border">{item.id}</td>
+                <td className="px-4 py-2 border">
+                  <div class="avatar">
+                    <div class="mask mask-squircle h-12 w-12">
+                      <img
+                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                        alt="Avatar Tailwind CSS Component"
+                      />
+                    </div>
+                  </div>
+                </td>
                 <td className="px-4 py-2 border">{item.doj}</td>
                 <td className="px-4 py-2 border">{item.dob}</td>
                 <td className="px-4 py-2 border">{item.salary}</td>

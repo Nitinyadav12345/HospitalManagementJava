@@ -76,16 +76,19 @@ export async function getAllPayments() {
   return result;
 }
 
-
-export async function uploadUserImage({image ,userid}) {
-    const token = sessionStorage.getItem("token");
-    const res = await axios.post(
-        `${config2.url}/user/profileImage/${userid}` , image ,{
-            headers:{
-                'Content-Type':'multipart/form-data',
-                Authorization:`Bearer ${token}`
-            }
-        }
-    );
-    return res;
+export async function uploadUserImage({ image, userid }) {
+  const token = sessionStorage.getItem("token");
+  const formData = new FormData();
+  formData.append("image", image);
+  const res = await axios.post(
+    `${config2.url}/user/profileImage/${userid}`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res;
 }
