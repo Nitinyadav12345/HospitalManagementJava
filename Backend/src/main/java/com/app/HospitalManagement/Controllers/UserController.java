@@ -56,6 +56,7 @@ public class UserController {
         ApiResponseToken responseToken = new ApiResponseToken("Success",jwtToken);
         return ResponseEntity.ok(responseToken);
     }
+
     @GetMapping("/profileImage")
     public ResponseEntity<byte[]> getUserImage() {
         log.info("inside the getuserimage method");
@@ -66,10 +67,10 @@ public class UserController {
     }
 
 
-    @PostMapping("/profileImage")
-    public ResponseEntity updateUserImage(@ModelAttribute RegisterDto user){
+    @PostMapping("/profileImage/{id}")
+    public ResponseEntity updateUserImage(@ModelAttribute RegisterDto user ,@PathVariable Long id ){
         ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
-        String res = userService.updateImageUser(user);
+        String res = userService.updateImageUser(user , id);
         return ResponseEntity.ok(response);
     }
 }

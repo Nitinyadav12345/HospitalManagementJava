@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 const EmployeeTable = ({
@@ -9,11 +9,13 @@ const EmployeeTable = ({
   paginate,
   currentPage,
 }) => {
-  const pageNumbers = [];
+  const [searchTerm, setSearchTerm] = useState("");
 
+  const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
     pageNumbers.push(i);
   }
+
   const handleDelete = async (id) => {
     try {
       await onDelete({ id });
@@ -25,8 +27,26 @@ const EmployeeTable = ({
     }
   };
 
+  // Filter data based on search term
+  const filteredData = data.filter((item) => {
+    return (
+      item.user?.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.user?.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.user?.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+
   return (
     <div>
+      <div className="flex justify-center">
+        <input
+          type="text"
+          placeholder="Search by email, role, or name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="mb-4 p-2 border border-gray-300 rounded w-full max-w-lg"
+        />
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
@@ -45,7 +65,7 @@ const EmployeeTable = ({
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
+            {filteredData.map((item) => (
               <tr key={item.id}>
                 <td className="px-4 py-2 border">{item.id}</td>
                 <td className="px-4 py-2 border">{item.doj}</td>
@@ -76,11 +96,13 @@ const EmployeeTable = ({
             {pageNumbers.map((number) => (
               <li
                 key={number}
-                className={`mx-1 ${currentPage === number ? "font-bold" : ""}`}
+                className={`mx-1 ${
+                  currentPage === number ? "font-bold" : ""
+                } bg-pink-700 rounded-md`}
               >
                 <button
                   onClick={() => paginate(number)}
-                  className="px-4 py-2 border rounded-md"
+                  className="px-4 py-2  rounded-md"
                 >
                   {number}
                 </button>

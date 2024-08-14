@@ -38,10 +38,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String updateImageUser(RegisterDto user) {
-        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        System.out.println(email);
-        UserEntity user1 = userRepositiory.findByEmail(email).orElseThrow();
+    public String updateImageUser(RegisterDto user , Long id) {
+        UserEntity user1 = userRepositiory.findById(id).orElseThrow();
         try {
             user1.setUserImage(user.getImage().getBytes());
         }
@@ -55,6 +53,7 @@ public class UserServiceImpl implements UserService{
     public byte[] getUserImage() {
         String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         UserEntity user1 = userRepositiory.findByEmail(email).orElseThrow();
+        log.info("getImage");
         return user1.getUserImage();
     }
 

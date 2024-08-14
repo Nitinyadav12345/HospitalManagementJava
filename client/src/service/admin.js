@@ -65,3 +65,27 @@ export async function revenueGenrator() {
   const totalFees = arr.reduce((sum, bill) => sum + bill.fees, 0);
   return totalFees;
 }
+
+export async function getAllPayments() {
+  const token = sessionStorage.getItem("token");
+  const result = await axios.get(`${config2.url}/api/payments`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return result;
+}
+
+
+export async function uploadUserImage({image ,userid}) {
+    const token = sessionStorage.getItem("token");
+    const res = await axios.post(
+        `${config2.url}/user/profileImage/${userid}` , image ,{
+            headers:{
+                'Content-Type':'multipart/form-data',
+                Authorization:`Bearer ${token}`
+            }
+        }
+    );
+    return res;
+}

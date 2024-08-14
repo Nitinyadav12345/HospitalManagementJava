@@ -5,13 +5,14 @@ import Dashboard from "./Dashboard";
 import AddEmployee from "./AddEmployee";
 import axios from "axios";
 import { config2 } from "../../config";
+import ShowAllPaymentDetails from "./ShowAllPaymentDetails";
 const SidebarP = () => {
   const menu = [
     { name: "Dashboard", path: "" },
     { name: "Add Employee", path: "addemp" },
     { name: "Bills", path: "bills" },
   ];
-  
+
   const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
     const fetchImage = async () => {
@@ -23,7 +24,7 @@ const SidebarP = () => {
           },
           responseType: "arraybuffer",
         });
-        const imageBlob = new Blob([response.data], { type: "image/jpeg" }); // Adjust type as necessary
+        const imageBlob = new Blob([response.data], { type: "image/jpeg" }); 
         const imageObjectURL = URL.createObjectURL(imageBlob);
         setImageUrl(imageObjectURL);
       } catch (error) {
@@ -34,10 +35,10 @@ const SidebarP = () => {
     fetchImage();
   }, []);
   const navigate = useNavigate();
-  const logout = ()=>{
+  const logout = () => {
     sessionStorage.clear();
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   return (
     <div class="flex h-screen bg-pink-100">
@@ -118,6 +119,7 @@ const SidebarP = () => {
           <Routes>
             <Route path="/" element={<Dashboard />}></Route>
             <Route path="/addemp" element={<AddEmployee />}></Route>
+            <Route path="/bills" element={<ShowAllPaymentDetails />}></Route>
           </Routes>
         </div>
       </div>

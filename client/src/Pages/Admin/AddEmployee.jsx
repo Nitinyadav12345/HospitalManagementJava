@@ -5,12 +5,18 @@ import {
   validatePhone,
 } from "../../Validations/validation";
 import { toast } from "react-toastify";
-import { employeeRegistration, userRegistration } from "../../service/admin";
+import {
+  employeeRegistration,
+  uploadUserImage,
+  userRegistration,
+} from "../../service/admin";
 import axios from "axios";
 import { config2 } from "../../config";
 import { useLocation } from "react-router-dom";
 
 function AddEmployee() {
+  const [file, setFile] = useState(null);
+
   const initialFormData = {
     id: "",
     name: "",
@@ -69,6 +75,10 @@ function AddEmployee() {
     } else {
       const { name, email, password, phoneNumber, role } = formData;
       try {
+        if (!file) {
+          toast.error("plz  select file");
+          return;
+        }
         const result = await userRegistration({
           name,
           email,
@@ -80,6 +90,11 @@ function AddEmployee() {
         if (result.data.status === "Success") {
           const userid = result.data.data.id;
           console.log(userid);
+          const res1 = await uploadUserImage({ file, userid });
+          console.log(res1);
+          if (res1.data.status === "Success") {
+            toast.success(res1.data.data);
+          }
           const { doj, dob, salary, charges, department } = formData;
           const res = await employeeRegistration({
             doj,
@@ -118,6 +133,14 @@ function AddEmployee() {
       <form onSubmit={handleSubmit}>
         <h2 className="text-xl font-semibold mb-4">User Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="mb-4">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+          </div>
+
           <div>
             <label className="block text-gray-700 font-bold mb-2">Name:</label>
             <input
