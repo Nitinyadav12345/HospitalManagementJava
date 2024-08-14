@@ -10,7 +10,7 @@ import SidebarC from "./Pages/Chemist/SidebarC";
 import SidebarA from "./Pages/Admin/SidebarA";
 import SidebarR from "./Pages/Receptionist/SidebarR";
 import Appointment from "./Pages/Patient/Appointment";
-import AboutUs from "./Pages/aboutUs";
+import AboutUs from "./Pages/Aboutus";
 import ContactUs from "./Pages/ContactUs";
 
 function App() {
