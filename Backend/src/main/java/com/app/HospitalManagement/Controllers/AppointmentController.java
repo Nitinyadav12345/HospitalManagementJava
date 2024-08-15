@@ -62,4 +62,12 @@ public class AppointmentController {
         return ResponseEntity.ok(responseSuccess);
     }
 
+    @GetMapping("/doctor/{id}")
+    public ResponseEntity<?> getPatientAppointmentByDoctor(@PathVariable Long id){
+        ApiResponseSuccess<List<AppointmentEntity>> responseSuccess = new ApiResponseSuccess<>();
+        List<AppointmentEntity> list = appointmentService.getAppointmentByDoctorId(id);
+        responseSuccess.setData(list);
+        return ResponseEntity.ok(responseSuccess);
+    }
+
 }

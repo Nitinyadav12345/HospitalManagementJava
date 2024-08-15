@@ -10,6 +10,7 @@ const Appointment = () => {
   const [appointment, setAppointment] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5); // Number of items per page
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null); // State to track selected appointment ID
 
   useEffect(() => {
     const getappoint = async () => {
@@ -19,10 +20,9 @@ const Appointment = () => {
           const id = res.data.data;
           const result = await getAllAppointment({ id });
           setAppointment(result.data.data);
-          console.log(appointment);
         }
       } catch (error) {
-        console.log("error on loading the appointment data");
+        console.log("Error on loading the appointment data", error);
       }
     };
     getappoint();
@@ -30,17 +30,26 @@ const Appointment = () => {
 
   const handleCancel = async (id) => {
     const status = "CANCELLED";
-    const res = await cancelAppointment({ status, id });
-    if (res.data.status === "Success") {
-      toast.success("Canceled Successfully");
-      setAppointment(
-        appointment.map((app) =>
-          app.id === id ? { ...app, status: "CANCELLED" } : app
-        )
-      );
-    } else {
-      console.log("Error occurred on canceling the appointment");
+    try {
+      const res = await cancelAppointment({ status, id });
+      if (res.data.status === "Success") {
+        toast.success("Canceled Successfully");
+        setAppointment(
+          appointment.map((app) =>
+            app.id === id ? { ...app, status: "CANCELLED" } : app
+          )
+        );
+      } else {
+        console.log("Error occurred on canceling the appointment");
+      }
+    } catch (error) {
+      console.log("Error in canceling appointment", error);
     }
+  };
+
+  const handlePress = (id) => {
+    // Ensure the state toggles correctly and persists
+    setSelectedAppointmentId(selectedAppointmentId === id ? null : id);
   };
 
   // Get current items for the current page
@@ -75,40 +84,60 @@ const Appointment = () => {
             </thead>
             <tbody>
               {currentItems.map((obj) => (
-                <tr key={obj.id}>
-                  <th>{obj.id}</th>
-                  <td>{obj?.doctor?.user?.name}</td>
-                  <td>{obj?.patient?.disease}</td>
-                  <td>
-                    <span
-                      className={`btn ${
-                        obj.status === "CONFIRMED"
-                          ? "btn-success"
-                          : obj.status === "CANCELLED"
-                          ? "btn-error"
-                          : "btn-warning"
-                      }`}
-                    >
-                      {obj.status}
-                    </span>
-                  </td>
-                  <td>{obj.appdate}</td>
-                  <td>
-                    {obj.status === "PENDING" && (
-                      <button
-                        onClick={() => handleCancel(obj.id)}
-                        className="btn btn-error"
+                <React.Fragment key={obj.id}>
+                  <tr>
+                    <th>{obj.id}</th>
+                    <td>{obj?.doctor?.user?.name}</td>
+                    <td>{obj?.patient?.disease}</td>
+                    <td>
+                      <span
+                        className={`btn ${
+                          obj.status === "CONFIRMED"
+                            ? "btn-success"
+                            : obj.status === "CANCELLED"
+                            ? "btn-error"
+                            : "btn-warning"
+                        }`}
                       >
-                        Cancel
-                      </button>
-                    )}
-                  </td>
-                  <td>
-                    {obj.status === "CONFIRMED" && (
-                      <button className="btn btn-info">Info</button>
-                    )}
-                  </td>
-                </tr>
+                        {obj.status}
+                      </span>
+                    </td>
+                    <td>{obj.appdate}</td>
+                    <td>
+                      {obj.status === "PENDING" && (
+                        <button
+                          onClick={() => handleCancel(obj.id)}
+                          className="btn btn-error"
+                        >
+                          Cancel
+                        </button>
+                      )}
+                    </td>
+                    <td>
+                      {obj.status === "CONFIRMED" && (
+                        <button
+                          onClick={() => handlePress(obj.id)}
+                          className="btn btn-info"
+                        >
+                          Info
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                  {selectedAppointmentId === obj.id && (
+                    <tr>
+                      <td colSpan="7">
+                        <div className="bg-gray-100 p-4 mt-2 rounded">
+                          <h3 className="text-lg font-bold">Prescription:</h3>
+                          <p>
+                            {obj?.patient?.prescription ||
+                              "No prescription available."}
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
               ))}
             </tbody>
           </table>

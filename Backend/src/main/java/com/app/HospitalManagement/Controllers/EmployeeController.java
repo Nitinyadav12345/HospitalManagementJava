@@ -10,6 +10,7 @@ import com.app.HospitalManagement.services.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,6 +86,15 @@ public class EmployeeController {
         ApiResponseSuccess<EmployeeEntity> responseSuccess = new ApiResponseSuccess<>();
         EmployeeEntity emp = employeeRepositiory.findById(id).orElseThrow();
         responseSuccess.setData(emp);
+        return ResponseEntity.ok(responseSuccess);
+    }
+
+    @GetMapping("/getid")
+    public ResponseEntity<?> getEmployeeid(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        EmployeeEntity employee = employeeService.getEmployee(email);
+        ApiResponseSuccess<Long> responseSuccess = new ApiResponseSuccess<>();
+        responseSuccess.setData(employee.getId());
         return ResponseEntity.ok(responseSuccess);
     }
 }

@@ -3,7 +3,6 @@ import SidebarMenu from "../../Components/SidebarMenu";
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Appointment from "./Appointment";
 import ScheApp from "./ScheApp";
-import Prescription from "./Prescription";
 import axios from "axios";
 import { config2 } from "../../config";
 
@@ -11,7 +10,6 @@ const SidebarP = () => {
   const menu = [
     { name: "Book Appointment", path: "" },
     { name: "Appointment History", path: "history" },
-    { name: "Prescription", path: "getpres" },
   ];
   const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
@@ -111,7 +109,6 @@ const SidebarP = () => {
           <Routes>
             <Route path="history" element={<Appointment />} />
             <Route path="" element={<ScheApp />} />
-            <Route path="getpres" element={<Prescription />} />
             {/* Add other nested routes here */}
           </Routes>
         </div>

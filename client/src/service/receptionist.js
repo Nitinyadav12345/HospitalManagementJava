@@ -29,3 +29,19 @@ export async function getAdmitedPatients() {
   });
   return result;
 }
+
+export async function dischargePatient({ id }) {
+  const token = sessionStorage.getItem("token");
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+  const body = { dod: formattedDate, id };
+  const result = await axios.post(`${config2.url}/patient/discharge`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return result;
+}

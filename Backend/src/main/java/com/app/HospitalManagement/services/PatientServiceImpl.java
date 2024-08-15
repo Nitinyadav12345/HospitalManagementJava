@@ -12,6 +12,7 @@ import com.app.HospitalManagement.repositories.UserRepositiory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,5 +87,22 @@ public class PatientServiceImpl implements  PatientService{
     @Override
     public List<PatientEntity> getAllAdmitedPatients() {
         return patientRepo.findByisAdmit();
+    }
+
+    @Override
+    public String dischargePatient(Long id, LocalDate x ) {
+        PatientEntity patient =  patientRepo.findById(id).orElseThrow();
+        patient.setDod(x);
+        patient.setBedno(0);
+        patientRepo.save(patient);
+        return "Patient Discharged";
+    }
+
+    @Override
+    public String insertPrescription(PatientDto patientDto) {
+        PatientEntity patient =  patientRepo.findById(patientDto.getId()).orElseThrow();
+        patient.setPrescription(patientDto.getPrescription());
+        patientRepo.save(patient);
+        return "Prescription added SuccessFully";
     }
 }

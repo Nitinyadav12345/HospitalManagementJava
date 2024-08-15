@@ -76,4 +76,9 @@ public class EmployeeServiceImpl implements  EmployeeService{
                 employeeRepositiory.deleteById(id);
                 return "Employee deleted Successfully";
         }
+
+        @Override
+        public EmployeeEntity getEmployee(String email) {
+                return employeeRepositiory.findByEmail(email).orElseThrow();
+        }
 }

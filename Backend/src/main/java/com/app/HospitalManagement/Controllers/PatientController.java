@@ -14,6 +14,7 @@ import org.springframework.security.web.server.authorization.AuthorizationContex
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -42,7 +43,7 @@ public class PatientController {
         ApiResponseSuccess<List<PatientEntity>> response = new ApiResponseSuccess<>();
         List<PatientEntity> patientEntities = patientService.getAllPatient();
         response.setData(patientEntities);
-        return ResponseEntity.ok(patientEntities);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/update")
@@ -68,6 +69,29 @@ public class PatientController {
         Long id = patient.getId();
         ApiResponseSuccess<Long> responseSuccess = new ApiResponseSuccess<>();
         responseSuccess.setData(id);
+        return ResponseEntity.ok(responseSuccess);
+    }
+
+    @PostMapping("/discharge")
+    public ResponseEntity<?> dischargePatient(@RequestBody PatientDto patientDto){
+        Long id = patientDto.getId();
+        log.info("{}",patientDto);
+        LocalDate x = patientDto.getDod();
+        int bedno = patientDto.getBedno();
+        log.info("{}",x);
+        ApiResponseSuccess<String> responseSuccess = new ApiResponseSuccess<>();
+        String msg = patientService.dischargePatient(id , x );
+        responseSuccess.setData(msg);
+        log.error("discharge");
+        return ResponseEntity.ok(responseSuccess);
+    }
+
+    @PostMapping("/addPrescription")
+    public ResponseEntity<?> insertPresciption(@RequestBody PatientDto patientDto){
+        log.info("press {}" , patientDto);
+        ApiResponseSuccess<String> responseSuccess = new ApiResponseSuccess<>();
+        String msg  = patientService.insertPrescription(patientDto);
+        responseSuccess.setData(msg);
         return ResponseEntity.ok(responseSuccess);
     }
 }

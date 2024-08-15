@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PatientService {
@@ -22,4 +23,6 @@ public interface PatientService {
     String updatePatient(String email , PatientDto patientDto);
     String appointDoctor(Long id , Long did);
     List<PatientEntity> getAllAdmitedPatients();
+    String dischargePatient(Long id , LocalDate x);
+    String insertPrescription(PatientDto patientDto);
 }
