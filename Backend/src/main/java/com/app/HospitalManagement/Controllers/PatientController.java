@@ -9,6 +9,8 @@ import com.app.HospitalManagement.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.server.authorization.AuthorizationContext;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,7 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired PatientRepository patientRepository;
 
     @PostMapping("/register")
     public ResponseEntity<?> patientRegister(@RequestBody PatientDto patientDto){
@@ -42,12 +45,29 @@ public class PatientController {
         return ResponseEntity.ok(patientEntities);
     }
 
-    @GetMapping("/update/{id}/{did}")
-    public ResponseEntity<?> appointDoctor(@PathVariable(name = "id") Long id ,@PathVariable(name = "did") Long did){
-        log.info("inside the function get all Doctors");
+    @PostMapping("/update")
+    public ResponseEntity<?> appointDoctor(@RequestBody PatientDto patientDto){
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
-        String msg = patientService.appointDoctor(id,did);
+        String msg = patientService.updatePatient(email,patientDto);
         response.setData(msg);
         return ResponseEntity.ok(response);
+    }
+    @GetMapping("/admitedpatients")
+    public ResponseEntity<?> getAllAdmitedPatients(){
+        log.info("inside the get all admited patients");
+        ApiResponseSuccess<List<PatientEntity>> responseSuccess = new ApiResponseSuccess<>();
+        List<PatientEntity> patientLists = patientService.getAllAdmitedPatients();
+        responseSuccess.setData(patientLists);
+        return ResponseEntity.ok(responseSuccess);
+    }
+    @GetMapping("/patient")
+    public ResponseEntity<?> getPatient(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        PatientEntity patient = patientRepository.findByemail(email,PatientEntity.class).orElseThrow();
+        Long id = patient.getId();
+        ApiResponseSuccess<Long> responseSuccess = new ApiResponseSuccess<>();
+        responseSuccess.setData(id);
+        return ResponseEntity.ok(responseSuccess);
     }
 }

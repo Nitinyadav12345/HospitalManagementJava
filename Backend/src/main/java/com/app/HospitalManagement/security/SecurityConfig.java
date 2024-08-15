@@ -44,14 +44,15 @@ public class SecurityConfig {
                 and().
                 authorizeRequests()
                 //TO PERMIT THE API FOR aLL USERS
-                .antMatchers("/products/view","/users/signup","/users/signin","/user/login","/user/register",
+                .antMatchers("/products/view","/users/signup","/users/signin","/user/login","/user/register","/api/payments/execelReport/{id}",
                         "/v*/api-doc*/**","/swagger-ui/**","/employee/employees","/patient/register","/doctor/doctors", "/patient/patients").permitAll()
                 // only required for JS clnts (react / angular) : for the pre flight requests
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 //TO PERMIT THE API FOR ROLE BASED
                 .antMatchers("/appointment/updatestatus").hasAuthority("DOCTOR")
                 .antMatchers("/chemist/medicene/insert").hasAuthority("CHEMIST")
-                .antMatchers("/patient/update/**").hasAuthority("PATIENT")
+                .antMatchers("/patient/update/**","/appointment/updatestatus").hasAuthority("PATIENT")
+                .antMatchers("/patient/admitedpatients").hasAuthority("RECEPTIONIST")
                 .antMatchers("/employee/register" , "/employee/update","/employee/delete/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()

@@ -1,14 +1,19 @@
 package com.app.HospitalManagement.Controllers;
 
+import com.app.HospitalManagement.dto.AppointmentDtoInsert;
 import com.app.HospitalManagement.dto.AppointmentStatusDto;
+import com.app.HospitalManagement.entites.AppointmentEntity;
 import com.app.HospitalManagement.response.ApiResponseFailure;
 import com.app.HospitalManagement.response.ApiResponseSuccess;
 import com.app.HospitalManagement.services.AppointmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/appointment")
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
+
 
     @PostMapping("/updatestatus")
     public ResponseEntity<?> updateStatus(@RequestBody AppointmentStatusDto appointmentStatusDto){
@@ -38,4 +44,22 @@ public class AppointmentController {
         }
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/bookapp")
+    public ResponseEntity<?> bookAppointment(@RequestBody AppointmentDtoInsert appoint){
+        log.info("inside the function updateStatus {}" , appoint);
+        ApiResponseSuccess<String> response = new ApiResponseSuccess<>();
+        String msg = appointmentService.insertAppointment(appoint);
+        response.setData(msg);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/patient/{id}")
+    public ResponseEntity<?> getPatientAppointment(@PathVariable Long id){
+        ApiResponseSuccess<List<AppointmentEntity>> responseSuccess = new ApiResponseSuccess<>();
+        List<AppointmentEntity> list = appointmentService.getAppointmentByPatientId(id);
+        responseSuccess.setData(list);
+        return ResponseEntity.ok(responseSuccess);
+    }
+
 }

@@ -1,6 +1,6 @@
-import React , { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import SidebarMenu from "../../Components/SidebarMenu";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Appointment from "./Appointment";
 import ScheApp from "./ScheApp";
 import Prescription from "./Prescription";
@@ -11,7 +11,7 @@ const SidebarP = () => {
   const menu = [
     { name: "Book Appointment", path: "" },
     { name: "Appointment History", path: "history" },
-    { name: "Prescription", path: "getpres" }
+    { name: "Prescription", path: "getpres" },
   ];
   const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
@@ -35,21 +35,17 @@ const SidebarP = () => {
     fetchImage();
   }, []);
   const navigate = useNavigate();
-  const logout = ()=>{
+  const logout = () => {
     sessionStorage.clear();
-    navigate("/")
-  }
+    navigate("/");
+  };
   return (
     <div className="flex h-screen bg-pink-100">
       <div className="hidden md:flex flex-col w-64 bg-pink-500">
         <div className="flex items-center justify-center h-16 bg-pink-900">
           <div className="flex-1">
             <a className="btn btn-ghost text-xl">
-              <img
-                className="w-10"
-                src="../../Resources/logo.png"
-                alt="logo"
-              />
+              <img className="w-10" src="../../Resources/logo.png" alt="logo" />
               <span className="font-extrabold text-2xl">HMS</span>
             </a>
           </div>
@@ -91,21 +87,21 @@ const SidebarP = () => {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img
-                    alt="Avatar"
-                    src={imageUrl}
-                  />
+                  <img alt="Avatar" src={imageUrl} />
                 </div>
               </div>
               <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
-                  <a className="justify-between">
+                  <Link to="/userprofile" className="justify-between">
                     Profile
-                    <span className="badge">New</span>
-                  </a>
+                  </Link>
                 </li>
-                <li><a>Settings</a></li>
-                <li><button onClick={logout}>Logout</button></li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <button onClick={logout}>Logout</button>
+                </li>
               </ul>
             </div>
           </div>

@@ -67,6 +67,7 @@ public class EmployeeController {
         }
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id ){
         log.info("inside the function deleteEmployee {}" , id);

@@ -39,7 +39,7 @@ export async function employeeRegistration({
 }
 
 export async function employeelist() {
-  const token = sessionStorage.getItem("token");
+
   const result = await axios.get(`${config2.url}/employee/employees`);
   return result;
 }

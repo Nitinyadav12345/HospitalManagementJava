@@ -1,8 +1,13 @@
 package com.app.HospitalManagement.services;
 import com.app.HospitalManagement.dto.AppointmentDtoInsert;
 import com.app.HospitalManagement.entites.AppointmentEntity;
-import com.app.HospitalManagement.entites.Status;  
+import com.app.HospitalManagement.entites.EmployeeEntity;
+import com.app.HospitalManagement.entites.PatientEntity;
+import com.app.HospitalManagement.entites.Status;
 import com.app.HospitalManagement.repositories.AppointmentRepository;
+import com.app.HospitalManagement.repositories.EmployeeRepositiory;
+import com.app.HospitalManagement.repositories.PatientRepository;
+import com.app.HospitalManagement.repositories.PaymentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +22,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
     @Autowired
-    private EmployeeService employeeService;
-//    @Autowired
-//    private PatientService patientService;
+    private EmployeeRepositiory employeeRepositiory;
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Autowired
     private ModelMapper model;
@@ -27,7 +32,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public String insertAppointment(AppointmentDtoInsert appointment) {
-        return "";
+        AppointmentEntity appointment1 = model.map(appointment,AppointmentEntity.class);
+        PatientEntity patient = patientRepository.findById(appointment.getPatientId()).orElseThrow();
+        EmployeeEntity employee = employeeRepositiory.findById(appointment.getDoctorId()).orElseThrow();
+        appointment1.setPatient(patient);
+        appointment1.setDoctor(employee);
+        appointmentRepository.save(appointment1);
+        return "Booked Successfully";
     }
 
     @Override

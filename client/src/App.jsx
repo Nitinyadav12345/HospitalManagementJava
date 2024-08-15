@@ -9,9 +9,9 @@ import SidebarD from "./Pages/Doctor/SidebarD";
 import SidebarC from "./Pages/Chemist/SidebarC";
 import SidebarA from "./Pages/Admin/SidebarA";
 import SidebarR from "./Pages/Receptionist/SidebarR";
-import Appointment from "./Pages/Patient/Appointment";
 import AboutUs from "./Pages/Aboutus";
 import ContactUs from "./Pages/ContactUs";
+import ProfileUser from "./Components/ProfileUser";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/userProfile" element={<ProfileUser />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/register" element={<Register />} />

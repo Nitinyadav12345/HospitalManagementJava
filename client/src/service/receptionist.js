@@ -8,10 +8,21 @@ export async function patientRegistration({
   doa,
   userId,
   bedno,
+  isadmit,
 }) {
   const token = sessionStorage.getItem("token");
-  const body = { bloodgroup, dob, disease, doa, userId, bedno };
+  const body = { bloodgroup, dob, disease, doa, userId, bedno, isadmit };
   const result = await axios.post(`${config2.url}/patient/register`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return result;
+}
+
+export async function getAdmitedPatients() {
+  const token = sessionStorage.getItem("token");
+  const result = await axios.get(`${config2.url}/patient/admitedpatients`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

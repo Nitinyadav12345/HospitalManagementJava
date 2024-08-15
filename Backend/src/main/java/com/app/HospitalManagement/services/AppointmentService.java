@@ -13,5 +13,4 @@ public interface AppointmentService {
    List<AppointmentEntity> getAppointmentByPatientId(Long patientId);
    String updateAppointmentStatus(Long appointmentId, Status newStatus);
    List<AppointmentEntity> getAllApointment();
-
 }

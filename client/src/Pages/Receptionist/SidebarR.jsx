@@ -5,10 +5,12 @@ import AddPatient from "./AddPatient";
 import Discharge from "./Discharge";
 import axios from "axios";
 import { config2 } from "../../config";
+import Bill from "./Bill";
 const SidebarP = () => {
   const menu = [
-    { name: "Add Patient", path: "" },
+    { name: "Addmit Patient", path: "" },
     { name: "Discharge Patient", path: "dispat" },
+    { name: "Billing", path: "bill" },
   ];
   const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
@@ -116,6 +118,7 @@ const SidebarP = () => {
           <Routes>
             <Route path="" element={<AddPatient />}></Route>
             <Route path="dispat" element={<Discharge />}></Route>
+            <Route path="bill" element={<Bill />}></Route>
           </Routes>
         </div>
       </div>

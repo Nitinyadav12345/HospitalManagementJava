@@ -63,8 +63,12 @@ public class PatientServiceImpl implements  PatientService{
     }
 
     @Override
-    public String updatePatient() {
-        return "";
+    public String updatePatient(String email , PatientDto patientDto) {
+        UserEntity user = userRepo.findByEmail(email).orElseThrow();
+        PatientEntity patient = modelMapper.map(patientDto,PatientEntity.class);
+        patient.setUser(user);
+        patientRepo.save(patient);
+        return "Patient Details updated Successfully";
     }
 
     @Override
@@ -77,5 +81,10 @@ public class PatientServiceImpl implements  PatientService{
         patient.setDoctor(doctor);
         patientRepo.save(patient);
         return "Doctor Appointed";
+    }
+
+    @Override
+    public List<PatientEntity> getAllAdmitedPatients() {
+        return patientRepo.findByisAdmit();
     }
 }

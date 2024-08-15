@@ -29,6 +29,7 @@ public class PatientEntity {
     @OneToOne
     @JoinColumn(name = "userID")
     private UserEntity user;
+    @Column(unique = true)
     private int bedno;
     @Column(nullable = false)
     private LocalDate doa;

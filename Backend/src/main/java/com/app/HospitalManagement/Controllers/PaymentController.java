@@ -5,10 +5,15 @@ import com.app.HospitalManagement.entites.PaymentEntity;
 import com.app.HospitalManagement.exception.NoRecordFoundException;
 import com.app.HospitalManagement.response.ApiResponseFailure;
 import com.app.HospitalManagement.response.ApiResponseSuccess;
+import com.app.HospitalManagement.services.ExcelFileReport;
 import com.app.HospitalManagement.services.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +27,9 @@ public class PaymentController {
 
     @Autowired
     private PaymentService paymentService;
+
+    @Autowired
+    private ExcelFileReport excelFileReport;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -97,4 +105,16 @@ public class PaymentController {
             return ResponseEntity.badRequest().body(failureResponse);
         }
     }
+
+    @GetMapping("/execelReport/{id}")
+    public ResponseEntity<Resource> getBill(@PathVariable Long id){
+        String filename = "bill.xlsx";
+        InputStreamResource file = new InputStreamResource(excelFileReport.paymentBill(id));
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
+    }
+
 }

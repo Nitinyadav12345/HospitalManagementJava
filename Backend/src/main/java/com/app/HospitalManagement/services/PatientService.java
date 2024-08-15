@@ -19,7 +19,7 @@ public interface PatientService {
     List<PatientEntity> getAllPatient();
     //patient by patientId
     PatientEntity getPatientbyId(Long id);
-    String updatePatient();
+    String updatePatient(String email , PatientDto patientDto);
     String appointDoctor(Long id , Long did);
-
+    List<PatientEntity> getAllAdmitedPatients();
 }

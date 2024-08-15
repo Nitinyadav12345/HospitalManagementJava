@@ -20,6 +20,7 @@ function AddPatient() {
     bedno: 0,
     disease: "",
     doa: "",
+    isadmit: "true",
   };
   const [formData, setFormData] = useState(intialState);
 
@@ -71,7 +72,7 @@ function AddPatient() {
           if (res1.data.status === "Success") {
             toast.success(res1.data.data);
           }
-          const { bloodgroup, dob, disease, doa, bedno } = formData;
+          const { bloodgroup, dob, disease, doa, bedno, isadmit } = formData;
           const res = await patientRegistration({
             bloodgroup,
             dob,
@@ -79,6 +80,7 @@ function AddPatient() {
             doa,
             userId,
             bedno,
+            isadmit,
           });
           console.log(res);
           if (res.data.status === "Success") {
