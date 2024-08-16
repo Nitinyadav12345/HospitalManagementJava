@@ -49,9 +49,9 @@ public class SecurityConfig {
                 // only required for JS clnts (react / angular) : for the pre flight requests
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 //TO PERMIT THE API FOR ROLE BASED
-                .antMatchers("/appointment/updatestatus","/patient/addPrescription").hasAuthority("DOCTOR")
+                .antMatchers("/patient/addPrescription").hasAuthority("DOCTOR")
                 .antMatchers("/chemist/medicene/insert").hasAuthority("CHEMIST")
-                .antMatchers("/patient/update/**","/appointment/updatestatus").hasAuthority("PATIENT")
+                .antMatchers("/patient/update/**").hasAuthority("PATIENT")
                 .antMatchers("/patient/admitedpatients").hasAuthority("RECEPTIONIST")
                 .antMatchers("/employee/register" , "/employee/update","/employee/delete/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
